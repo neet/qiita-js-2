@@ -588,7 +588,7 @@ export class Qiita {
    * @param title 生成される投稿のタイトルの雛形
    * @return テンプレート
    */
-  public createTemplate = (body: string, name: string, tags: Qiita.Tagging, title: string): Promise<Qiita.Template> => {
+  public createTemplate = (body: string, name: string, tags: Qiita.Tagging[], title: string): Promise<Qiita.Template> => {
     return this.post(`${this.endpoint}${this.version}/templates`, { body, name, tags, title });
   }
 
@@ -600,8 +600,63 @@ export class Qiita {
    * @param title 生成される投稿のタイトルの雛形
    * @return テンプレート
    */
-  public updateTempalte = (body: string, name: string, tags: Qiita.Tagging, title: string): Promise<Qiita.Template> => {
+  public updateTempalte = (body: string, name: string, tags: Qiita.Tagging[], title: string): Promise<Qiita.Template> => {
     return this.patch(`${this.endpoint}${this.version}/templates`, { body, name, tags, title });
+  }
+
+  /**
+   * チーム内に存在するプロジェクト一覧をプロジェクト作成日時の降順で返します。
+   * @param page ページ番号 (1から100まで)
+   * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
+   * @return プロジェクト一覧
+   */
+  public fetchProjects = (page: string, perPage: string): Promise<Qiita.Project[]> => {
+    return this.get(`${this.endpoint}${this.version}/projects`, {
+      page,
+      per_page: perPage,
+    });
+  }
+
+  /**
+   * プロジェクトを新たに作成します。
+   * @param archived このプロジェクトが進行中かどうか
+   * @param body Markdown形式の本文
+   * @param name プロジェクト名
+   * @param tags 投稿に付いたタグ一覧
+   * @return プロジェクト
+   */
+  public createProject = (archived: boolean, body: string, name: string, tags: Qiita.Tagging[]): Promise<Qiita.Project> => {
+    return this.post(`${this.endpoint}${this.version}/projects`, { archived, body, name, tags });
+  }
+
+  /**
+   * プロジェクトを削除します。
+   * @param projectId プロジェクトID
+   * @return 空のオブジェクト
+   */
+  public deleteProject = (projectId: string): Promise<{}> => {
+    return this.delete(`${this.endpoint}${this.version}/projects/${projectId}`);
+  }
+
+  /**
+   * プロジェクトを返します。
+   * @param projectId プロジェクトID
+   * @return プロジェクト
+   */
+  public fetchProject = (projectId: string): Promise<Qiita.Project> => {
+    return this.get(`${this.endpoint}${this.version}/projects/${projectId}`);
+  }
+
+  /**
+   * プロジェクトを更新します。
+   * @param archived このプロジェクトが進行中かどうか
+   * @param body Markdown形式の本文
+   * @param name プロジェクト名
+   * @param tags 投稿に付いたタグ一覧
+   * @return プロジェクト
+   */
+  public updateProject = (archived: boolean, body: string, name: string, tags: Qiita.Tagging[]): Promise<Qiita.Project> => {
+    return this.patch(`${this.endpoint}${this.version}/projects`, { archived, body, name, tags });
   }
 
 }
