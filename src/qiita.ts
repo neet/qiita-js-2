@@ -225,6 +225,7 @@ export namespace Qiita {
 
 }
 
+
 export class Qiita {
 
   private token = '';
@@ -367,6 +368,39 @@ export class Qiita {
   }
 
   /**
+   * 与えられた認証情報をもとに新しいアクセストークンを発行します。
+   * @param clientId 登録されたAPIクライアントを特定するためのID
+   * @param clientSecret 登録されたAPIクライアントを認証するための秘密鍵
+   * @param code リダイレクト用のURLに付与された、アクセストークンと交換するための文字列
+   * @return アクセストークン
+   */
+  public fetchAccessToken = (clientId: string, clientSecret: string, code: string): Promise<Qiita.AccessToken> => {
+    return this.post(`${this.endpoint}${this.version}/access_tokens`, {
+      client_id: clientId,
+      client_secret: clientSecret,
+      code,
+    });
+  }
+
+  /**
+   * 指定されたアクセストークンを失効させ、それ以降利用できないようにします。
+   * @param token アクセストークン
+   * @return 空のオブジェクト
+   */
+  public deleteAccessToken = (token: string): Promise<{}> => {
+    return this.delete(`${this.endpoint}${this.version}/access_tokens/${token}`);
+  }
+
+  /**
+   * コメントを削除します。
+   * @param commentId コメントのID
+   * @return 空のオブジェクト
+   */
+  public deleteComment = (commentId: string): Promise<{}> => {
+    return this.delete(`${this.endpoint}${this.version}/comments/${commentId}`);
+  }
+
+  /**
    * コメントを取得します。
    * @param commentId コメントのID
    * @return コメントのエンティティを返します
@@ -382,15 +416,6 @@ export class Qiita {
    */
   public updateComment = (commentId: string, body: string): Promise<Qiita.Comment> => {
     return this.patch(`${this.endpoint}${this.version}/comments/${commentId}`, { body });
-  }
-
-  /**
-   * コメントを削除します。
-   * @param commentId コメントのID
-   * @return 空のオブジェクト
-   */
-  public deleteComment = (commentId: string): Promise<{}> => {
-    return this.delete(`${this.endpoint}${this.version}/comments/${commentId}`);
   }
 
   /**
@@ -430,4 +455,91 @@ export class Qiita {
   public createCommentToProject = (projectId: string, body: string): Promise<Qiita.Comment[]> => {
     return this.post(`${this.endpoint}${this.version}/items/${projectId}/comments`, { body });
   }
+
+  /**
+   * 投稿にタグを追加します。Qiita:Teamでのみ有効です。
+   * @param itemId 投稿のID
+   * @param name タグを特定するための一意な名前
+   * @param versions (説明なし)
+   */
+  public addTaggingToItem = (itemId: string, name: string, versions: string[]): Promise<Qiita.Tagging> => {
+    return this.post(`${this.endpoint}${this.version}/items/${itemId}/taggings`, { name, versions });
+  }
+
+  /**
+   * 投稿から指定されたタグを取り除きます。Qiita:Teamでのみ有効です。
+   * @param itemId 投稿のID
+   * @param taggingId タギングのID
+   * @return 空のオブジェクト
+   */
+  public removeTaggingFromItem = (itemId, taggingId): Promise<{}> => {
+    return this.delete(`${this.endpoint}${this.version}/items/${itemId}/taggings/${taggingId}`);
+  }
+
+  /**
+   * タグ一覧を作成日時の降順で返します。
+   * @param page ページ番号 (1から100まで)
+   * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
+   * @param sort 並び順 (countで投稿数順、nameで名前順)
+   * @return タグ一覧
+   */
+  public fetchTags = (page: string, perPage: string, sort: string): Promise<Qiita.Tag[]> => {
+    return this.get(`${this.endpoint}${this.version}/tags`, {
+      page,
+      per_page: perPage,
+      sort,
+    });
+  }
+
+  /**
+   * タグを取得します。
+   * @param tagId タグのID
+   * @return タグ
+   */
+  public fetchTag = (tagId: string): Promise<Qiita.Tag> => {
+    return this.get(`${this.endpoint}${this.version}/tags/${tagId}`);
+  }
+
+  /**
+   * ユーザがフォローしているタグ一覧をフォロー日時の降順で返します。
+   * @param userId ユーザーID
+   * @param page ページ番号 (1から100まで)
+   * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
+   * @return タグ一覧
+   */
+  public fetchFollowingTags = (userId: string, page: string, perPage: string): Promise<Qiita.Tag[]> => {
+    return this.get(`${this.endpoint}${this.version}/${userId}/following_tags`, {
+      page,
+      per_page: perPage,
+    });
+  }
+
+  /**
+   * タグをフォローします。
+   * @param tagId タグのID
+   * @return 空のオブジェクト
+   */
+  public unfollowTag = (tagId: string): Promise<{}> => {
+    return this.delete(`${this.endpoint}${this.version}/tags/${tagId}/following`);
+  }
+
+  /**
+   * タグをフォローしているかどうかを調べます。
+   * @param tagId タグのID
+   * @return タグ
+   */
+  public fetchIfFollowingTag = (tagId: string): Promise<Qiita.Tag> => {
+    return this.get(`${this.endpoint}${this.version}/tags/${tagId}/following`);
+  }
+
+  /**
+   * タグをフォローします。
+   * @param tagId タグのID
+   * @return 空のオブジェクト
+   */
+  public followTag = (tagId: string): Promise<Qiita.Tag> => {
+    return this.put(`${this.endpoint}${this.version}/tags/${tagId}/following`);
+  }
+
+
 }
