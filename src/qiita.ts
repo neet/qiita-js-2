@@ -659,4 +659,94 @@ export class Qiita {
     return this.patch(`${this.endpoint}${this.version}/projects`, { archived, body, name, tags });
   }
 
+  /**
+   * 投稿をストックしているユーザ一覧を、ストックした日時の降順で返します。
+   * @param page ページ番号 (1から100まで)
+   * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
+   * @return ユーザー一覧
+   */
+  public fetchStockersFromItem = (itemId: string, page: string, perPage: string): Promise<Qiita.User[]> => {
+    return this.get(`${this.endpoint}${this.version}/items/${itemId}/stockers`, {
+      page,
+      per_page: perPage,
+    });
+  }
+
+  /**
+   * 全てのユーザの一覧を作成日時の降順で取得します。
+   * @param page ページ番号 (1から100まで)
+   * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
+   * @return ユーザー一覧
+   */
+  public fetchUsers = (page: string, perPage: string): Promise<Qiita.User[]> => {
+    return this.get(`${this.endpoint}${this.version}/users`, {
+      page,
+      per_page: perPage,
+    });
+  }
+
+  /**
+   * ユーザを取得します。
+   * @param userId ユーザーID
+   * @return ユーザー
+   */
+  public fetchUser = (userId: string): Promise<Qiita.User> => {
+    return this.get(`${this.endpoint}${this.version}/users/${userId}`);
+  }
+
+  /**
+   * ユーザがフォローしているユーザ一覧を取得します。
+   * @param userId ユーザーID
+   * @param page ページ番号 (1から100まで)
+   * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
+   * @return ユーザー一覧
+   */
+  public fetchFolloweesFromUser = (userId: string, page: string, perPage: string): Promise<Qiita.User[]> => {
+    return this.get(`${this.endpoint}${this.version}/users/${userId}/followees`, {
+      page,
+      per_page: perPage,
+    })
+  }
+
+  /**
+   * ユーザをフォローしているユーザ一覧を取得します。
+   * @param userId ユーザーID
+   * @param page ページ番号 (1から100まで)
+   * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
+   * @return ユーザー一覧
+   */
+  public fetchFollowersFromUser = (userId: string, page: string, perPage: string): Promise<Qiita.User[]> => {
+    return this.get(`${this.endpoint}${this.version}/users/${userId}/followers`, {
+      page,
+      per_page: perPage,
+    })
+  }
+
+  /**
+   * ユーザをフォローしているユーザ一覧を取得します。
+   * @param userId ユーザーID
+   * @return 空のオブジェクト
+   */
+  public unfollowUser = (userId: string): Promise<{}> => {
+    return this.delete(`${this.endpoint}${this.version}/users/${userId}/following`);
+  }
+
+  /**
+   * ユーザへのフォローを外します。
+   * @param userId ユーザーID
+   * @return 空のオブジェクト
+   */
+  public fetchIfFollowUser = (userId: string): Promise<{}> => {
+    return this.get(`${this.endpoint}${this.version}/users/${userId}/following`);
+  }
+
+  /**
+   * ユーザをフォローしている場合に204を返します。
+   * @param userId ユーザーID
+   * @return 空のオブジェクト
+   */
+  public followUser = (userId: string): Promise<{}> => {
+    return this.put(`${this.endpoint}${this.version}/users/${userId}/following`);
+  }
+
 }
