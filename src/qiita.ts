@@ -1,5 +1,5 @@
 import nodeFetch from 'node-fetch';
-import queryString from 'query-string';
+import * as queryString from 'query-string';
 
 export namespace Qiita {
 
@@ -17,6 +17,30 @@ export namespace Qiita {
     user: User;
   }
 
+  export interface AccessToken {
+    /** 登録されたAPIクライアントを特定するためのIDです。40桁の16進数で表現されます。 */
+    client_id: string;
+    /** アプリケーションが利用するスコープをスペース区切りで指定できます。 */
+    scopes: string[];
+    /** CSRF対策のため、認可後にリダイレクトするURLのクエリに含まれる値を指定できます。 */
+    token: string;
+  }
+
+  export interface Group {
+    /** データが作成された日時 */
+    created_at: string;
+    /** グループの一意なIDを表します。 */
+    id: number;
+    /** グループに付けられた表示用の名前を表します。 */
+    name: string;
+    /** 非公開グループかどうかを表します。 */
+    private: boolean;
+    /** データが最後に更新された日時 */
+    updated_at: string;
+    /** グループのチーム上での一意な名前を表します。 */
+    url_name: string;
+  }
+
   export interface Comment {
     /** コメントの内容を表すMarkdown形式の文字列 */
     body: string;
@@ -32,7 +56,72 @@ export namespace Qiita {
     user: User;
   }
 
-  interface User {
+  export interface Tagging {
+    /** タグを特定するための一意な名前 */
+    name: string;
+    /** (説明無し) */
+    versions: string[];
+  }
+
+  export interface Tag {
+    /** このタグをフォローしているユーザの数 */
+    followers_count: number;
+    /** このタグに設定されたアイコン画像のURL */
+    icon_url?: string;
+    /** タグを特定するための一意な名前 */
+    id: string;
+    /** このタグが付けられた投稿の数 */
+    items_count: number;
+  }
+
+  export interface Team {
+    /** チームが利用可能な状態かどうか */
+    active: boolean;
+    /** チームの一意なID */
+    id: string;
+    /** チームに設定されている名前を表します。 */
+    name: string;
+  }
+
+  export interface Template {
+    /** テンプレートの本文 */
+    body: string;
+    /** テンプレートの一意なID */
+    id: number;
+    /** テンプレートを判別するための名前 */
+    name: string;
+    /** 変数を展開した状態の本文 */
+    expanded_body: string;
+    /** 変数を展開した状態のタグ一覧 */
+    expanded_tags: Tagging[];
+    /** 変数を展開した状態のタイトル */
+    expanded_title: string;
+    /** タグ一覧 */
+    tags: Tagging[];
+    /** 生成される投稿のタイトルの雛形 */
+    title: string;
+  }
+
+  export interface Project {
+    /** HTML形式の本文 */
+    rendered_body: string;
+    /** このプロジェクトが進行中かどうか */
+    archived: boolean;
+    /** Markdown形式の本文 */
+    body: string;
+    /** データが作成された日時 */
+    created_at: string;
+    /** プロジェクトのチーム上での一意なID */
+    id: number;
+    /** プロジェクト名 */
+    name: string;
+    /** 絵文字リアクション数 */
+    reactions_count: number;
+    /** データが最後に更新された日時 */
+    updated_at: string;
+  }
+
+  export interface User {
     /** 自己紹介文 */
     description?: string;
     /** Facebook ID  */
@@ -65,6 +154,66 @@ export namespace Qiita {
     website_url?: string;
   }
 
+  export interface ExpandedTemplate {
+    /** 変数を展開した状態の本文 */
+    expanded_body: string;
+    /** 変数を展開した状態のタグ一覧 */
+    expanded_tags: Tagging[];
+    /** 変数を展開した状態のタイトル */
+    expanded_title: string;
+  }
+
+  export interface Item {
+    /** HTML形式の本文 */
+    rendered_body: string;
+    /** Markdown形式の本文 */
+    body: string;
+    /** この投稿が共同更新状態かどうか (Qiita:Teamでのみ有効) */
+    coediting: boolean;
+    /** この投稿へのコメントの数 */
+    comments_count: number;
+    /** データが作成された日時 */
+    created_at: string;
+    /** Qiita:Teamのグループを表します。 */
+    group: Group;
+    /** 投稿の一意なID */
+    id: string;
+    /** この投稿への「いいね！」の数（Qiitaでのみ有効） */
+    likes_count: number;
+    /** 限定共有状態かどうかを表すフラグ (Qiita:Teamでは無効) */
+    private: boolean;
+    /** 投稿に付いたタグ一覧 */
+    tags: Tagging[];
+    /** 投稿のタイトル */
+    title: string;
+    /** データが最後に更新された日時 */
+    updated_at: string;
+    /** 投稿のURL */
+    url: string;
+    /** Qiita上のユーザを表します。 */
+    user: User;
+    /** 閲覧数 */
+    page_views_count: number;
+  }
+
+  export interface TeamInvitation {
+    /** 招待中のメンバーのemailアドレスです。 */
+    email: string;
+    /** 招待用URLです。有効期限は1日です。 */
+    url: string;
+  }
+
+  export interface Reaction {
+    /** データが作成された日時 */
+    created_at: string;
+    /** 絵文字画像のURL */
+    image_url: string;
+    /** 絵文字の識別子 */
+    name: string;
+    /** Qiita上のユーザを表します。 */
+    user: User;
+  }
+
   export interface AuthenticatedUser extends User {
     /** 1ヶ月あたりにQiitaにアップロードできる画像の総容量 */
     image_monthly_upload_limit: number;
@@ -78,16 +227,16 @@ export namespace Qiita {
 
 export class Qiita {
 
-  private token    = '';
+  private token = '';
   private endpoint = 'https://qiita.com';
-  private version  = '/api/v2';
+  private version = '/api/v2';
 
   /**
    * Qiita APIにアクセスするためのトークンを設定します
    * @param token トークン文字列
    * @return 何も返しません
    */
-  public setToken (token: string): void {
+  public setToken(token: string): void {
     this.token = token;
   }
 
@@ -96,7 +245,7 @@ export class Qiita {
    * @param endpoint エンドポイントへのURI
    * @return 何も返しません
    */
-  public setEndpoint (endpoint: string): void {
+  public setEndpoint(endpoint: string): void {
     this.endpoint = endpoint;
   }
 
@@ -105,7 +254,7 @@ export class Qiita {
    * @param version APIへのパスの文字列 (e.g. `/api/v2`)
    * @return 何も返しません
    */
-  public setVersion (version: string): void {
+  public setVersion(version: string): void {
     this.version = version;
   }
 
@@ -119,15 +268,15 @@ export class Qiita {
   private request = async (url: string, options: any = {}): Promise<any> => {
     options = { ...options };
 
-    if ( options.headers === undefined ) {
+    if (options.headers === undefined) {
       options.headers = {};
     }
 
-    if ( this.token ) {
+    if (this.token) {
       options.headers['Authorization'] = `Bearer ${this.token}`;
     }
 
-    options.headers['Content-Type']  = 'application/json';
+    options.headers['Content-Type'] = 'application/json';
 
     try {
       let response: any;
@@ -140,7 +289,7 @@ export class Qiita {
 
       const data = await response.json();
 
-      if ( response.ok ) {
+      if (response.ok) {
         return data
       };
 
