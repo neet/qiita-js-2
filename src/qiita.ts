@@ -541,5 +541,67 @@ export class Qiita {
     return this.put(`${this.endpoint}${this.version}/tags/${tagId}/following`);
   }
 
+  /**
+   * ユーザが所属している全てのチームを、チーム作成日時の降順で返します。
+   * @return チーム一覧
+   */
+  public fetchTeams = (): Promise<Qiita.Team[]> => {
+    return this.get(`${this.endpoint}${this.version}/teams`);
+  }
+
+  /**
+   * チーム内のテンプレート一覧を返します。
+   * @param page ページ番号 (1から100まで)
+   * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
+   * @return テンプレート一覧
+   */
+  public fetchTemplates = (page: string, perPage: string): Promise<Qiita.Template[]> => {
+    return this.get(`${this.endpoint}${this.version}/templates`, {
+      page,
+      per_page: perPage,
+    });
+  }
+
+  /**
+   * テンプレートを削除します。
+   * @param templateId テンプレートID
+   * @return 空のオブジェクト
+   */
+  public deleteTemplate = (templateId: string): Promise<{}> => {
+    return this.delete(`${this.endpoint}${this.version}/templates/${templateId}`);
+  }
+
+  /**
+   * テンプレートを取得します。
+   * @param tempalteId テンプレートID
+   * @return テンプレート
+   */
+  public fetchTempalte = (templateId: string): Promise<Qiita.Template> => {
+    return this.get(`${this.endpoint}${this.version}/templates/${templateId}`);
+  }
+
+  /**
+   * 新しくテンプレートを作成します。
+   * @param body テンプレートの本文
+   * @param name テンプレートを判別するための名前
+   * @param tags タグ一覧
+   * @param title 生成される投稿のタイトルの雛形
+   * @return テンプレート
+   */
+  public createTemplate = (body: string, name: string, tags: Qiita.Tagging, title: string): Promise<Qiita.Template> => {
+    return this.post(`${this.endpoint}${this.version}/templates`, { body, name, tags, title });
+  }
+
+  /**
+   * テンプレートを更新します。
+   * @param body テンプレートの本文
+   * @param name テンプレートを判別するための名前
+   * @param tags タグ一覧
+   * @param title 生成される投稿のタイトルの雛形
+   * @return テンプレート
+   */
+  public updateTempalte = (body: string, name: string, tags: Qiita.Tagging, title: string): Promise<Qiita.Template> => {
+    return this.patch(`${this.endpoint}${this.version}/templates`, { body, name, tags, title });
+  }
 
 }
