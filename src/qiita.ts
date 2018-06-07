@@ -225,7 +225,6 @@ export namespace Qiita {
 
 }
 
-
 export class Qiita {
 
   private token = '';
@@ -237,7 +236,7 @@ export class Qiita {
    * @param token トークン文字列
    * @return 何も返しません
    */
-  public setToken(token: string): void {
+  public setToken (token: string): void {
     this.token = token;
   }
 
@@ -246,7 +245,7 @@ export class Qiita {
    * @param endpoint エンドポイントへのURI
    * @return 何も返しません
    */
-  public setEndpoint(endpoint: string): void {
+  public setEndpoint (endpoint: string): void {
     this.endpoint = endpoint;
   }
 
@@ -255,7 +254,7 @@ export class Qiita {
    * @param version APIへのパスの文字列 (e.g. `/api/v2`)
    * @return 何も返しません
    */
-  public setVersion(version: string): void {
+  public setVersion (version: string): void {
     this.version = version;
   }
 
@@ -274,7 +273,7 @@ export class Qiita {
     }
 
     if (this.token) {
-      options.headers['Authorization'] = `Bearer ${this.token}`;
+      options.headers.Authorization = `Bearer ${this.token}`;
     }
 
     options.headers['Content-Type'] = 'application/json';
@@ -291,8 +290,8 @@ export class Qiita {
       const data = await response.json();
 
       if (response.ok) {
-        return data
-      };
+        return data;
+      }
 
       throw data;
     } catch (error) {
@@ -381,7 +380,6 @@ export class Qiita {
     return this.delete(`${this.endpoint}${this.version}/access_tokens/${token}`);
   }
 
-
   /**
    * コメントを取得します。
    * @param commentId コメントのID
@@ -414,7 +412,7 @@ export class Qiita {
    * @param commentId コメントID
    * @return 絵文字リアクション
    */
-  public fetchCommentReactions = (commentId: string, name: string): Promise<Qiita.Reaction[]> => {
+  public fetchCommentReactions = (commentId: string): Promise<Qiita.Reaction[]> => {
     return this.get(`${this.endpoint}${this.version}/comments/${commentId}/reactions`);
   }
 
@@ -437,7 +435,6 @@ export class Qiita {
   public deleteCommentReaction = (commentId: string, name: string): Promise<Qiita.Reaction> => {
     return this.delete(`${this.endpoint}${this.version}/comments/${commentId}/reactions`, { name });
   }
-
 
   /**
    * タグ一覧を作成日時の降順で返します。
@@ -504,7 +501,6 @@ export class Qiita {
     });
   }
 
-
   /**
    * チーム内のテンプレート一覧を返します。
    * @param page ページ番号 (1から100まで)
@@ -559,7 +555,6 @@ export class Qiita {
   public deleteTemplate = (templateId: string): Promise<{}> => {
     return this.delete(`${this.endpoint}${this.version}/templates/${templateId}`);
   }
-
 
   /**
    * チーム内に存在するプロジェクト一覧をプロジェクト作成日時の降順で返します。
@@ -664,7 +659,6 @@ export class Qiita {
     return this.delete(`${this.endpoint}${this.version}/projects/${projectId}/reactions`, { name });
   }
 
-
   /**
    * 全てのユーザの一覧を作成日時の降順で取得します。
    * @param page ページ番号 (1から100まで)
@@ -698,7 +692,7 @@ export class Qiita {
     return this.get(`${this.endpoint}${this.version}/users/${userId}/followees`, {
       page,
       per_page: perPage,
-    })
+    });
   }
 
   /**
@@ -712,7 +706,7 @@ export class Qiita {
     return this.get(`${this.endpoint}${this.version}/users/${userId}/followers`, {
       page,
       per_page: perPage,
-    })
+    });
   }
 
   /**
@@ -792,7 +786,11 @@ export class Qiita {
    * @return 投稿一覧
    */
   public fetchItems = (page: string, perPage: string, query: string): Promise<Qiita.Item[]> => {
-    return this.get(`${this.endpoint}${this.version}/items`);
+    return this.get(`${this.endpoint}${this.version}/items`, {
+      page,
+      per_page: perPage,
+      query,
+    });
   }
 
   /**
@@ -999,7 +997,6 @@ export class Qiita {
     return this.post(`${this.endpoint}${this.version}/items/${itemId}/comments`, { body });
   }
 
-
   /**
    * 投稿にタグを追加します。Qiita:Teamでのみ有効です。
    * @param itemId 投稿のID
@@ -1013,13 +1010,12 @@ export class Qiita {
   /**
    * 投稿から指定されたタグを取り除きます。Qiita:Teamでのみ有効です。
    * @param itemId 投稿のID
-   * @param taggingId タギングのID
+   * @param tagId タギングのID
    * @return 空のオブジェクト
    */
-  public removeItemTag = (itemId, taggingId): Promise<{}> => {
-    return this.delete(`${this.endpoint}${this.version}/items/${itemId}/taggings/${taggingId}`);
+  public removeItemTag = (itemId: string, tagId: string): Promise<{}> => {
+    return this.delete(`${this.endpoint}${this.version}/items/${itemId}/taggings/${tagId}`);
   }
-
 
   /**
    * ユーザが所属している全てのチームを、チーム作成日時の降順で返します。
@@ -1068,6 +1064,9 @@ export class Qiita {
    * @return 投稿一覧
    */
   public fetchMyItems = (page: string, perPage: string): Promise<Qiita.Item[]> => {
-    return this.get(`${this.endpoint}${this.version}/authenticated_user/items`);
+    return this.get(`${this.endpoint}${this.version}/authenticated_user/items`, {
+      page,
+      per_page: perPage,
+    });
   }
 }
