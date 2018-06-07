@@ -25,4 +25,4 @@ client.createItem({
 })
 ```
 
-利用可能なすべてのメソッドのドキュメントは[こちらからご覧いただけます．](https://neet.github.io/qiita-js-2/classes/_qiita_.qiita.html#get)
+利用可能なすべてのメソッドのドキュメントは[こちらからご覧いただけます．](https://neet.github.io/qiita-js-2/classes/_qiita_.qiita.html)
