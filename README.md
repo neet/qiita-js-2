@@ -1,13 +1,33 @@
 # qiita-js-2
 Modern Qiita v2 API client for Node/Browser
 
-## Usage
-`qiita-js-2`をインストールする
+## 使い方
+### `qiita-js-2`をインストールする
+
+**NPM:**
+```
+npm i qiita-js-2 --save
+```
+
+**Yarn:**
 ```
 yarn add qiita-js-2
 ```
 
-利用方法
+### トークンを取得
+Qiitaの[アプリケーションページ](https://qiita.com/settings/applications)を開き，新しいアクセストークンを発行します．
+
+![新しいアクセストークンを発行](https://i.imgur.com/LPtgosR.png)
+
+アクセストークンを発行します．説明と，必要に応じてスコープを付与し発行してください．
+
+![アクセストークンの発行](https://i.imgur.com/7yxJWmw.png)
+
+生成されたアクセストークンをコピーして保存してください．このトークンは以下で必要です
+
+![アクセストークン](https://i.imgur.com/l6V6qmg.png)
+
+### 利用する
 ```ts
 // Node.js
 const Qiita = require('qiita-js-2').default;
@@ -15,18 +35,11 @@ const Qiita = require('qiita-js-2').default;
 import * as Qiita from 'qiita-js-2';
 
 const client = new Qiita();
-
-client.setToken('your-token-here');
+client.setToken('ここにトークンを指定します');
 
 // 例: ユーザーを取得する
 client.fetchUser('neetshin').then((user) => {
   console.log(user);
-  /*
-    { description: null,
-    facebook_id: null,
-    followees_count: 0,
-    ...略
-  */
 })
 
 // 例: 新規投稿をする
@@ -39,12 +52,6 @@ client.createItem({
   private: false,
 }).then((newItem) => {
   console.log(newItem);
-  /*
-    { rendered_body: '<p>これは新しい投稿です</p>\n',
-    body: 'これは新しい投稿です\n',
-    coediting: false,
-    ...略
-  */
 });
 ```
 
