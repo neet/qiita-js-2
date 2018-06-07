@@ -409,6 +409,35 @@ export class Qiita {
     return this.delete(`${this.endpoint}${this.version}/comments/${commentId}`);
   }
 
+  /**
+   * コメントに付けられた絵文字リアクション一覧を作成日時の降順で返します。
+   * @param commentId コメントID
+   * @return 絵文字リアクション
+   */
+  public fetchCommentReactions = (commentId: string, name: string): Promise<Qiita.Reaction[]> => {
+    return this.get(`${this.endpoint}${this.version}/comments/${commentId}/reactions`);
+  }
+
+  /**
+   * コメントに絵文字リアクションを付けます。
+   * @param commentId コメントID
+   * @param name 絵文字の識別子
+   * @return 絵文字リアクション
+   */
+  public createCommentReaction = (commentId: string, name: string): Promise<Qiita.Reaction> => {
+    return this.post(`${this.endpoint}${this.version}/comments/${commentId}/reactions`, { name });
+  }
+
+  /**
+   * コメントから絵文字リアクションを削除します。
+   * @param commentId コメントID
+   * @param name 絵文字の識別子
+   * @return 絵文字リアクション
+   */
+  public deleteCommentReaction = (commentId: string, name: string): Promise<Qiita.Reaction> => {
+    return this.delete(`${this.endpoint}${this.version}/comments/${commentId}/reactions`, { name });
+  }
+
 
   /**
    * タグ一覧を作成日時の降順で返します。
@@ -604,6 +633,35 @@ export class Qiita {
    */
   public createProjectComment = (projectId: string, body: string): Promise<Qiita.Comment[]> => {
     return this.post(`${this.endpoint}${this.version}/projects/${projectId}/comments`, { body });
+  }
+
+  /**
+   * プロジェクトに付けられた絵文字リアクション一覧を作成日時の降順で返します。
+   * @param projectId プロジェクトID
+   * @return 絵文字リアクション一覧
+   */
+  public fetchProjectReactions = (projectId: string): Promise<Qiita.Reaction[]> => {
+    return this.get(`${this.endpoint}${this.version}/projects/${projectId}/reactions`);
+  }
+
+  /**
+   * プロジェクトに絵文字リアクションを付けます。
+   * @param projectId プロジェクトID
+   * @param name 絵文字の識別子
+   * @return 絵文字リアクション
+   */
+  public createProjectReaction = (projectId: string, name: string): Promise<Qiita.Reaction> => {
+    return this.post(`${this.endpoint}${this.version}/projects/${projectId}/reactions`, { name });
+  }
+
+  /**
+   * プロジェクトから絵文字リアクションを削除します。
+   * @param projectId プロジェクトID
+   * @param name 絵文字の識別子
+   * @return 絵文字リアクション
+   */
+  public deleteProjectReaction = (projectId: string, name: string): Promise<Qiita.Reaction> => {
+    return this.delete(`${this.endpoint}${this.version}/projects/${projectId}/reactions`, { name });
   }
 
 
@@ -872,6 +930,35 @@ export class Qiita {
   }
 
   /**
+   * 記事に付けられた絵文字リアクション一覧を作成日時の降順で返します。
+   * @param itemId 投稿ID
+   * @return 絵文字リアクション
+   */
+  public fetchItemReactions = (itemId: string): Promise<Qiita.Reaction[]> => {
+    return this.post(`${this.endpoint}${this.version}/items/${itemId}/reactions`);
+  }
+
+  /**
+   * 記事に絵文字リアクションを付けます。
+   * @param itemId 投稿ID
+   * @param name 絵文字の識別子
+   * @return 絵文字リアクション
+   */
+  public createItemReaction = (itemId: string, name: string): Promise<Qiita.Reaction> => {
+    return this.post(`${this.endpoint}${this.version}/items/${itemId}/reactions`, { name });
+  }
+
+  /**
+   * 記事から絵文字リアクションを削除します。
+   * @param itemId 投稿ID
+   * @param name 絵文字の識別子
+   * @return 絵文字リアクション
+   */
+  public deleteItemReaction = (itemId: string, name: string): Promise<Qiita.Reaction> => {
+    return this.delete(`${this.endpoint}${this.version}/items/${itemId}/reactions`, { name });
+  }
+
+  /**
    * 投稿につけられた「いいね！」を作成日時の降順で返します。
    * @param itemId 投稿のID
    * @return いいね！エンティティを返します
@@ -965,8 +1052,6 @@ export class Qiita {
   public deleteTeamInvitation = (): Promise<{}> => {
     return this.delete(`${this.endpoint}${this.version}/team_invitations`);
   }
-
-  // todo emoji reaction
 
   /**
    * アクセストークンに紐付いたユーザを返します。
