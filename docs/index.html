@@ -64,16 +64,34 @@
 			<div class="tsd-panel tsd-typography">
 				<h1 id="qiita-js-2">qiita-js-2</h1>
 				<p>Modern Qiita v2 API client for Node/Browser</p>
-				<h2 id="usage">Usage</h2>
-				<p><code>qiita-js-2</code>をインストールする</p>
+				<h2 id="-">使い方</h2>
+				<h3 id="qiita-js-2-"><code>qiita-js-2</code>をインストールする</h3>
+				<p><strong>NPM:</strong></p>
+				<pre><code>npm <span class="hljs-selector-tag">i</span> qiita-js-<span class="hljs-number">2</span> --save
+</code></pre><p><strong>Yarn:</strong></p>
 				<pre><code>yarn <span class="hljs-keyword">add</span><span class="bash"> qiita-js-2</span>
-</code></pre><p>例: 新規投稿をする</p>
-				<pre><code class="lang-ts"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> Qiita <span class="hljs-keyword">from</span> <span class="hljs-string">'qiita-js-2'</span>;
+</code></pre><h3 id="-">トークンを取得</h3>
+				<p>Qiitaの<a href="https://qiita.com/settings/applications">アプリケーションページ</a>を開き，新しいアクセストークンを発行します．</p>
+				<p><img src="https://i.imgur.com/LPtgosR.png" alt="新しいアクセストークンを発行"></p>
+				<p>アクセストークンを発行します．説明と，必要に応じてスコープを付与し発行してください．</p>
+				<p><img src="https://i.imgur.com/7yxJWmw.png" alt="アクセストークンの発行"></p>
+				<p>生成されたアクセストークンをコピーして保存してください．このトークンは以下で必要です</p>
+				<p><img src="https://i.imgur.com/l6V6qmg.png" alt="アクセストークン"></p>
+				<h3 id="-">利用する</h3>
+				<pre><code class="lang-ts"><span class="hljs-comment">// Node.js</span>
+<span class="hljs-keyword">const</span> Qiita = <span class="hljs-built_in">require</span>(<span class="hljs-string">'qiita-js-2'</span>).default;
+<span class="hljs-comment">// TypeScript あるいは Babel</span>
+<span class="hljs-keyword">import</span> Qiita <span class="hljs-keyword">from</span> <span class="hljs-string">'qiita-js-2'</span>;
 
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> Qiita();
+client.setToken(<span class="hljs-string">'ここにトークンを指定します'</span>);
 
-client.setToken(<span class="hljs-string">'your-token-here'</span>);
+<span class="hljs-comment">// 例: ユーザーを取得する</span>
+client.fetchUser(<span class="hljs-string">'neetshin'</span>).then(<span class="hljs-function">(<span class="hljs-params">user</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(user);
+})
 
+<span class="hljs-comment">// 例: 新規投稿をする</span>
 client.createItem({
   title: <span class="hljs-string">'新しい投稿'</span>,
   body:  <span class="hljs-string">'これは新しい投稿です'</span>,
@@ -81,8 +99,11 @@ client.createItem({
   gist:    <span class="hljs-literal">false</span>,
   twitter: <span class="hljs-literal">false</span>,
   <span class="hljs-keyword">private</span>: <span class="hljs-literal">false</span>,
-})
+}).then(<span class="hljs-function">(<span class="hljs-params">newItem</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(newItem);
+});
 </code></pre>
+				<p>利用可能なすべてのメソッドのドキュメントは<a href="https://neet.github.io/qiita-js-2/classes/_qiita_.qiita.html">こちらからご覧いただけます．</a></p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

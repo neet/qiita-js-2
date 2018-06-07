@@ -32,7 +32,7 @@ Qiitaの[アプリケーションページ](https://qiita.com/settings/applicati
 // Node.js
 const Qiita = require('qiita-js-2').default;
 // TypeScript あるいは Babel
-import * as Qiita from 'qiita-js-2';
+import Qiita from 'qiita-js-2';
 
 const client = new Qiita();
 client.setToken('ここにトークンを指定します');
