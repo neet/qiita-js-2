@@ -22,22 +22,21 @@ export class Qiita extends Gateway {
    * @param url リクエストするURL
    * @param params リクエストのオプション
    */
-  public async * paginationGenerator <T extends T[]> (url: string, params?: any): AsyncIterableIterator<T> {
+  public async * paginationGenerator <T extends any[]> (url: string, params?: any) {
     // Qiitaのページネーションインデックスは1から始まります
-    let nextPage = 1;
+    let page = 1;
 
     while (true) {
-      const data = await this.get<T>(url, params);
+      const data = await this.get<T>(url, { ...params, page });
       const result: T | 'reset' = yield data;
 
       if (result === 'reset') {
-        nextPage = 1;
+        page = 1;
       } else {
-        nextPage++;
+        page++;
 
-        // Qiita APIの最大ページネーション値 (100) か
         // レスポンスの配列の長さがない場合にイテレーターを終了します。
-        if (nextPage > 100 || !data.length) {
+        if (!data.length) {
           break;
         }
       }
@@ -129,10 +128,10 @@ export class Qiita extends Gateway {
    * @param page ページ番号 (1から100まで)
    * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
    * @param sort 並び順 (countで投稿数順、nameで名前順)
-   * @return タグ一覧
+   * @return タグ一覧を返す非同期反復可能オブジェクト
    */
-  public fetchTags = (page: string, perPage: string, sort: string): AsyncIterableIterator<Tag[]> => {
-    return this.paginationGenerator(`${this.url}${this.version}/tags`, {
+  public fetchTags = (page: string, perPage: string, sort: string) => {
+    return this.paginationGenerator<Tag[]>(`${this.url}${this.version}/tags`, {
       page,
       per_page: perPage,
       sort,
@@ -180,10 +179,10 @@ export class Qiita extends Gateway {
    * @param tagId タグID
    * @param page ページ番号 (1から100まで)
    * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
-   * @return 投稿一覧
+   * @return 投稿一覧を返す非同期反復可能オブジェクト
    */
-  public fetchTaggedItems = (tagId: string, page: string, perPage: string): Promise<Item[]> => {
-    return this.get(`${this.url}${this.version}/tags/${tagId}`, {
+  public fetchTaggedItems = (tagId: string, page: string, perPage: string) => {
+    return this.paginationGenerator<Item[]>(`${this.url}${this.version}/tags/${tagId}`, {
       page,
       per_page: perPage,
     });
@@ -193,10 +192,10 @@ export class Qiita extends Gateway {
    * チーム内のテンプレート一覧を返します。
    * @param page ページ番号 (1から100まで)
    * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
-   * @return テンプレート一覧
+   * @return テンプレート一覧を返す非同期反復可能オブジェクト
    */
-  public fetchTemplates = (page: string, perPage: string): Promise<Template[]> => {
-    return this.get(`${this.url}${this.version}/templates`, {
+  public fetchTemplates = (page: string, perPage: string) => {
+    return this.paginationGenerator<Template[]>(`${this.url}${this.version}/templates`, {
       page,
       per_page: perPage,
     });
@@ -250,8 +249,8 @@ export class Qiita extends Gateway {
    * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
    * @return プロジェクト一覧
    */
-  public fetchProjects = (page: string, perPage: string): Promise<Project[]> => {
-    return this.get(`${this.url}${this.version}/projects`, {
+  public fetchProjects = (page: string, perPage: string) => {
+    return this.paginationGenerator<Project[]>(`${this.url}${this.version}/projects`, {
       page,
       per_page: perPage,
     });
@@ -351,10 +350,10 @@ export class Qiita extends Gateway {
    * 全てのユーザの一覧を作成日時の降順で取得します。
    * @param page ページ番号 (1から100まで)
    * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
-   * @return ユーザー一覧
+   * @return ユーザー一覧を返す非同期反復可能オブジェクト
    */
-  public fetchUsers = (page: string, perPage: string): Promise<User[]> => {
-    return this.get(`${this.url}${this.version}/users`, {
+  public fetchUsers = (page: string, perPage: string) => {
+    return this.paginationGenerator<User[]>(`${this.url}${this.version}/users`, {
       page,
       per_page: perPage,
     });
@@ -374,10 +373,10 @@ export class Qiita extends Gateway {
    * @param userId ユーザーID
    * @param page ページ番号 (1から100まで)
    * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
-   * @return ユーザー一覧
+   * @return ユーザー一覧を返す非同期反復可能オブジェクト
    */
-  public fetchUserFollowees = (userId: string, page: string, perPage: string): Promise<User[]> => {
-    return this.get(`${this.url}${this.version}/users/${userId}/followees`, {
+  public fetchUserFollowees = (userId: string, page: string, perPage: string) => {
+    return this.paginationGenerator<User[]>(`${this.url}${this.version}/users/${userId}/followees`, {
       page,
       per_page: perPage,
     });
@@ -388,10 +387,10 @@ export class Qiita extends Gateway {
    * @param userId ユーザーID
    * @param page ページ番号 (1から100まで)
    * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
-   * @return ユーザー一覧
+   * @return ユーザー一覧を返す非同期反復可能オブジェクト
    */
-  public fetchUserFollowers = (userId: string, page: string, perPage: string): Promise<User[]> => {
-    return this.get(`${this.url}${this.version}/users/${userId}/followers`, {
+  public fetchUserFollowers = (userId: string, page: string, perPage: string) => {
+    return this.paginationGenerator<User[]>(`${this.url}${this.version}/users/${userId}/followers`, {
       page,
       per_page: perPage,
     });
@@ -402,10 +401,10 @@ export class Qiita extends Gateway {
    * @param userId ユーザID
    * @param page ページ番号 (1から100まで)
    * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
-   * @return 投稿一覧
+   * @return 投稿一覧を返す非同期反復可能オブジェクト
    */
-  public fetchUserItems = (userId: string, page: string, perPage: string): Promise<Item[]> => {
-    return this.get(`${this.url}${this.version}/users/${userId}/items`, {
+  public fetchUserItems = (userId: string, page: string, perPage: string) => {
+    return this.paginationGenerator<Item[]>(`${this.url}${this.version}/users/${userId}/items`, {
       page,
       per_page: perPage,
     });
@@ -416,10 +415,10 @@ export class Qiita extends Gateway {
    * @param userId ユーザID
    * @param page ページ番号 (1から100まで)
    * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
-   * @return 投稿一覧
+   * @return 投稿一覧を返す非同期反復可能オブジェクト
    */
-  public fetchUserStocks = (userId: string, page: string, perPage: string): Promise<Item[]> => {
-    return this.get(`${this.url}${this.version}/users/${userId}/items`, {
+  public fetchUserStocks = (userId: string, page: string, perPage: string) => {
+    return this.paginationGenerator<Item[]>(`${this.url}${this.version}/users/${userId}/items`, {
       page,
       per_page: perPage,
     });
@@ -430,10 +429,10 @@ export class Qiita extends Gateway {
    * @param userId ユーザーID
    * @param page ページ番号 (1から100まで)
    * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
-   * @return タグ一覧
+   * @return タグ一覧を返す非同期反復可能オブジェクト
    */
-  public fetchUserFollowingTags = (userId: string, page: string, perPage: string): Promise<Tag[]> => {
-    return this.get(`${this.url}${this.version}/users/${userId}/following_tags`, {
+  public fetchUserFollowingTags = (userId: string, page: string, perPage: string) => {
+    return this.paginationGenerator<Tag[]>(`${this.url}${this.version}/users/${userId}/following_tags`, {
       page,
       per_page: perPage,
     });
@@ -471,10 +470,10 @@ export class Qiita extends Gateway {
    * @param page ページ番号 (1から100まで)
    * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
    * @param query 検索クエリ
-   * @return 投稿一覧
+   * @return 投稿一覧を返す非同期反復可能オブジェクト
    */
-  public fetchItems = (page: string, perPage: string, query: string): Promise<Item[]> => {
-    return this.get(`${this.url}${this.version}/items`, {
+  public fetchItems = (page: string, perPage: string, query: string) => {
+    return this.paginationGenerator<Item[]>(`${this.url}${this.version}/items`, {
       page,
       per_page: perPage,
       query,
@@ -657,10 +656,10 @@ export class Qiita extends Gateway {
    * 投稿をストックしているユーザ一覧を、ストックした日時の降順で返します。
    * @param page ページ番号 (1から100まで)
    * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
-   * @return ユーザー一覧
+   * @return ユーザー一覧を返す非同期反復可能オブジェクト
    */
-  public fetchItemStockers = (itemId: string, page: string, perPage: string): Promise<User[]> => {
-    return this.get(`${this.url}${this.version}/items/${itemId}/stockers`, {
+  public fetchItemStockers = (itemId: string, page: string, perPage: string) => {
+    return this.paginationGenerator<User[]>(`${this.url}${this.version}/items/${itemId}/stockers`, {
       page,
       per_page: perPage,
     });
@@ -749,10 +748,10 @@ export class Qiita extends Gateway {
    * 認証中のユーザの投稿の一覧を作成日時の降順で返します。
    * @param page ページ番号 (1から100まで)
    * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
-   * @return 投稿一覧
+   * @return 投稿一覧を返す非同期反復可能オブジェクト
    */
-  public fetchMyItems = (page: string, perPage: string): Promise<Item[]> => {
-    return this.get(`${this.url}${this.version}/authenticated_user/items`, {
+  public fetchMyItems = (page: string, perPage: string) => {
+    return this.paginationGenerator<Item[]>(`${this.url}${this.version}/authenticated_user/items`, {
       page,
       per_page: perPage,
     });
