@@ -1,4 +1,8 @@
 # qiita-js-2
+[![npm](https://img.shields.io/npm/v/qiita-js-2.svg)](https://www.npmjs.com/package/qiita-js-2)
+[![Build Status](https://travis-ci.org/neet/qiita-js-2.svg?branch=master)](https://travis-ci.org/neet/qiita-js-2)
+[![Maintainability](https://api.codeclimate.com/v1/badges/9eb161f2bd4b1f062c9c/maintainability)](https://codeclimate.com/github/neet/qiita-js-2/maintainability)
+
 Modern Qiita v2 API client for Node/Browser
 
 ## 使い方
@@ -51,3 +55,36 @@ client.createItem({
 ```
 
 利用可能なすべてのメソッドのドキュメントは[こちらからご覧いただけます](https://neet.github.io/qiita-js-2/classes/_client_qiita_.qiita.html)。
+
+
+## 開発
+開発に必要なパッケージをインストールします
+```
+yarn --pure-lockfile
+```
+
+下記のコマンドでビルドします
+```
+yarn run test       # テストを実行します
+yarn run build      # JSをビルドします
+yarn run docs:build # ドキュメントを生成します。
+```
+
+## Maintainers
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/neet">
+          <img width="120" height="120" src="https://github.com/neet.png?size=120">
+          </br>
+          Neetshin
+        </a>
+      </td>
+    </tr>
+  <tbody>
+</table>
+
+## License
+MIT
