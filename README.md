@@ -6,7 +6,7 @@ Modern Qiita v2 API client for Node/Browser
 ```
 npm i qiita-js-2 --save
 ```
-<img src='https://c5.patreon.com/external/logo/become_a_patron_button.png' alt='Become a patron' width='140px' />
+<a href='https://www.patreon.com/neetshin'><img src='https://c5.patreon.com/external/logo/become_a_patron_button.png' alt='Become a patron' width='140px' /></a>
 
 ### トークンを取得
 Qiitaの[アプリケーションページ](https://qiita.com/settings/applications)を開き、新しいアクセストークンを発行します。
