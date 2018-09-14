@@ -2,7 +2,10 @@ import nodeFetch from 'node-fetch';
 import * as querystring from 'querystring';
 
 import { QiitaError } from '../errors/QiitaError';
+import { QiitaForbiddenError } from '../errors/QiitaForbiddenError';
+import { QiitaInternalServerError } from '../errors/QiitaInternalServerError';
 import { QiitaNotFoundError } from '../errors/QiitaNotFoundError';
+import { QiitaRateLimitError } from '../errors/QiitaRateLimitError';
 import { QiitaUnauthorizedError } from '../errors/QiitaUnauthorizedError';
 import { QiitaURLResolveError } from '../errors/QiitaURLResolveError';
 
@@ -96,13 +99,22 @@ export abstract class Gateway {
     if (response.ok) {
       return data as T;
     } else {
+      // Qiitaがエラーの際に返すレスポンスコードが明記されていなかったので
+      // ありそうなものをハンドルしています。
+      // ref: https://qiita.com/api/v2/docs#%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89
       switch (response.status) {
         case 401:
-          throw new QiitaUnauthorizedError(data.error);
+          throw new QiitaUnauthorizedError(data.message || 'リクエストに必要な権限が不足しています。');
+        case 403:
+          throw new QiitaForbiddenError(data.message || 'このリクエストは禁止されています。');
         case 404:
-          throw new QiitaNotFoundError(data.error);
+          throw new QiitaNotFoundError(data.message || '指定したエンドポイントが見つかりませんでした');
+        case 429:
+          throw new QiitaRateLimitError(data.message || 'APIのレートリミットに到達しました。時間をおいてもう一度お試しください。');
+        case 500:
+          throw new QiitaInternalServerError(data.message || 'Qiitaのサーバーが internal server error を返しました。ホストが混雑している可能性がありますので、時間をおいてもう一度お試しください。');
         default:
-          throw new QiitaError('QiitaError', data.error || 'Qiita APIのリクエスト中に予期せぬエラーが発生しました');
+          throw new QiitaError('QiitaError', data.message || 'Qiita APIのリクエスト中に予期せぬエラーが発生しました');
       }
     }
   }
