@@ -99,7 +99,7 @@ export abstract class Gateway {
     if (response.ok) {
       return data as T;
     } else {
-      // Qiitaがエラーの際に返すレスポンスコードが明記されていなかったので
+      // Qiitaがエラーの際に返すステータスコードが明記されていなかったので
       // ありそうなものをハンドルしています。
       // ref: https://qiita.com/api/v2/docs#%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89
       switch (response.status) {
