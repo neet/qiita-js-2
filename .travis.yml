@@ -24,4 +24,4 @@ before_script:
   - yarn run build
 
 script:
-  - "yarn run test:compile"
+  - "yarn run test:lint"

@@ -8,7 +8,7 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "test": "tslint -c tslint.yml 'src/**/*.{ts,tsx}'",
+    "test:lint": "tslint -c tslint.yml 'src/**/*.{ts,tsx}'",
     "build": "tsc",
     "docs:build": "typedoc ./src --out ./docs --excludeNotExported && touch ./docs/.nojekyll"
   },
