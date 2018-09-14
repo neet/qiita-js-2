@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Template | qiita-js-2</title>
+	<title>Tag | qiita-js-2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,16 +54,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_qiita_.html">&quot;qiita&quot;</a>
+					<a href="../modules/_entities_tag_.html">&quot;entities/Tag&quot;</a>
 				</li>
 				<li>
-					<a href="../classes/_qiita_.qiita.html">Qiita</a>
-				</li>
-				<li>
-					<a href="_qiita_.qiita.template.html">Template</a>
+					<a href="_entities_tag_.tag.html">Tag</a>
 				</li>
 			</ul>
-			<h1>Interface Template</h1>
+			<h1>Interface Tag</h1>
 		</div>
 	</div>
 </header>
@@ -74,7 +71,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Template</span>
+						<span class="target">Tag</span>
 					</li>
 				</ul>
 			</section>
@@ -85,14 +82,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_qiita_.qiita.template.html#body" class="tsd-kind-icon">body</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_qiita_.qiita.template.html#expanded_body" class="tsd-kind-icon">expanded_<wbr>body</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_qiita_.qiita.template.html#expanded_tags" class="tsd-kind-icon">expanded_<wbr>tags</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_qiita_.qiita.template.html#expanded_title" class="tsd-kind-icon">expanded_<wbr>title</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_qiita_.qiita.template.html#id" class="tsd-kind-icon">id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_qiita_.qiita.template.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_qiita_.qiita.template.html#tags" class="tsd-kind-icon">tags</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_qiita_.qiita.template.html#title" class="tsd-kind-icon">title</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_entities_tag_.tag.html#followers_count" class="tsd-kind-icon">followers_<wbr>count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_entities_tag_.tag.html#icon_url" class="tsd-kind-icon">icon_<wbr>url</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_entities_tag_.tag.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_entities_tag_.tag.html#items_count" class="tsd-kind-icon">items_<wbr>count</a></li>
 							</ul>
 						</section>
 					</div>
@@ -101,122 +94,62 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="body" class="tsd-anchor"></a>
-					<h3>body</h3>
-					<div class="tsd-signature tsd-kind-icon">body<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="followers_count" class="tsd-anchor"></a>
+					<h3>followers_<wbr>count</h3>
+					<div class="tsd-signature tsd-kind-icon">followers_<wbr>count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/neet/qiita-js-2/blob/9af8500/src/qiita.ts#L88">qiita.ts:88</a></li>
+							<li>Defined in <a href="https://github.com/neet/qiita-js-2/blob/abfd773/src/entities/Tag.ts#L3">entities/Tag.ts:3</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>テンプレートの本文</p>
+							<p>このタグをフォローしているユーザの数</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="expanded_body" class="tsd-anchor"></a>
-					<h3>expanded_<wbr>body</h3>
-					<div class="tsd-signature tsd-kind-icon">expanded_<wbr>body<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="icon_url" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> icon_<wbr>url</h3>
+					<div class="tsd-signature tsd-kind-icon">icon_<wbr>url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/neet/qiita-js-2/blob/9af8500/src/qiita.ts#L94">qiita.ts:94</a></li>
+							<li>Defined in <a href="https://github.com/neet/qiita-js-2/blob/abfd773/src/entities/Tag.ts#L5">entities/Tag.ts:5</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>変数を展開した状態の本文</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="expanded_tags" class="tsd-anchor"></a>
-					<h3>expanded_<wbr>tags</h3>
-					<div class="tsd-signature tsd-kind-icon">expanded_<wbr>tags<span class="tsd-signature-symbol">:</span> <a href="_qiita_.qiita.tagging.html" class="tsd-signature-type">Tagging</a><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/neet/qiita-js-2/blob/9af8500/src/qiita.ts#L96">qiita.ts:96</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>変数を展開した状態のタグ一覧</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="expanded_title" class="tsd-anchor"></a>
-					<h3>expanded_<wbr>title</h3>
-					<div class="tsd-signature tsd-kind-icon">expanded_<wbr>title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/neet/qiita-js-2/blob/9af8500/src/qiita.ts#L98">qiita.ts:98</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>変数を展開した状態のタイトル</p>
+							<p>このタグに設定されたアイコン画像のURL</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="id" class="tsd-anchor"></a>
 					<h3>id</h3>
-					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/neet/qiita-js-2/blob/9af8500/src/qiita.ts#L90">qiita.ts:90</a></li>
+							<li>Defined in <a href="https://github.com/neet/qiita-js-2/blob/abfd773/src/entities/Tag.ts#L7">entities/Tag.ts:7</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>テンプレートの一意なID</p>
+							<p>タグを特定するための一意な名前</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="items_count" class="tsd-anchor"></a>
+					<h3>items_<wbr>count</h3>
+					<div class="tsd-signature tsd-kind-icon">items_<wbr>count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/neet/qiita-js-2/blob/9af8500/src/qiita.ts#L92">qiita.ts:92</a></li>
+							<li>Defined in <a href="https://github.com/neet/qiita-js-2/blob/abfd773/src/entities/Tag.ts#L9">entities/Tag.ts:9</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>テンプレートを判別するための名前</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="tags" class="tsd-anchor"></a>
-					<h3>tags</h3>
-					<div class="tsd-signature tsd-kind-icon">tags<span class="tsd-signature-symbol">:</span> <a href="_qiita_.qiita.tagging.html" class="tsd-signature-type">Tagging</a><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/neet/qiita-js-2/blob/9af8500/src/qiita.ts#L100">qiita.ts:100</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>タグ一覧</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="title" class="tsd-anchor"></a>
-					<h3>title</h3>
-					<div class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/neet/qiita-js-2/blob/9af8500/src/qiita.ts#L102">qiita.ts:102</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>生成される投稿のタイトルの雛形</p>
+							<p>このタグが付けられた投稿の数</p>
 						</div>
 					</div>
 				</section>
@@ -229,10 +162,70 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_index_.html">"index"</a>
+						<a href="../modules/_client_gateway_.html">"client/<wbr>Gateway"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_client_qiita_.html">"client/<wbr>Qiita"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_accesstoken_.html">"entities/<wbr>Access<wbr>Token"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_authenticateduser_.html">"entities/<wbr>Authenticated<wbr>User"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_comment_.html">"entities/<wbr>Comment"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_expandedtemplate_.html">"entities/<wbr>Expanded<wbr>Template"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_group_.html">"entities/<wbr>Group"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_item_.html">"entities/<wbr>Item"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_like_.html">"entities/<wbr>Like"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_project_.html">"entities/<wbr>Project"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_reaction_.html">"entities/<wbr>Reaction"</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_qiita_.html">"qiita"</a>
+						<a href="../modules/_entities_tag_.html">"entities/<wbr>Tag"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_tagging_.html">"entities/<wbr>Tagging"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_team_.html">"entities/<wbr>Team"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_teaminvitation_.html">"entities/<wbr>Team<wbr>Invitation"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_template_.html">"entities/<wbr>Template"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_user_.html">"entities/<wbr>User"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_errors_qiitaerror_.html">"errors/<wbr>Qiita<wbr>Error"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_errors_qiitanotfounderror_.html">"errors/<wbr>Qiita<wbr>Not<wbr>Found<wbr>Error"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_errors_qiitaurlresolveerror_.html">"errors/<wbr>QiitaURLResolve<wbr>Error"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_errors_qiitaunauthorizederror_.html">"errors/<wbr>Qiita<wbr>Unauthorized<wbr>Error"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_index_.html">"index"</a>
 					</li>
 				</ul>
 			</nav>
@@ -240,37 +233,20 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_qiita_.qiita.html" class="tsd-kind-icon">Qiita</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_entities_tag_.tag.html" class="tsd-kind-icon">Tag</a>
 						<ul>
-							<li class="current tsd-kind-interface tsd-parent-kind-class">
-								<a href="_qiita_.qiita.template.html" class="tsd-kind-icon">Template</a>
-								<ul>
-									<li class=" tsd-kind-property tsd-parent-kind-interface">
-										<a href="_qiita_.qiita.template.html#body" class="tsd-kind-icon">body</a>
-									</li>
-									<li class=" tsd-kind-property tsd-parent-kind-interface">
-										<a href="_qiita_.qiita.template.html#expanded_body" class="tsd-kind-icon">expanded_<wbr>body</a>
-									</li>
-									<li class=" tsd-kind-property tsd-parent-kind-interface">
-										<a href="_qiita_.qiita.template.html#expanded_tags" class="tsd-kind-icon">expanded_<wbr>tags</a>
-									</li>
-									<li class=" tsd-kind-property tsd-parent-kind-interface">
-										<a href="_qiita_.qiita.template.html#expanded_title" class="tsd-kind-icon">expanded_<wbr>title</a>
-									</li>
-									<li class=" tsd-kind-property tsd-parent-kind-interface">
-										<a href="_qiita_.qiita.template.html#id" class="tsd-kind-icon">id</a>
-									</li>
-									<li class=" tsd-kind-property tsd-parent-kind-interface">
-										<a href="_qiita_.qiita.template.html#name" class="tsd-kind-icon">name</a>
-									</li>
-									<li class=" tsd-kind-property tsd-parent-kind-interface">
-										<a href="_qiita_.qiita.template.html#tags" class="tsd-kind-icon">tags</a>
-									</li>
-									<li class=" tsd-kind-property tsd-parent-kind-interface">
-										<a href="_qiita_.qiita.template.html#title" class="tsd-kind-icon">title</a>
-									</li>
-								</ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_entities_tag_.tag.html#followers_count" class="tsd-kind-icon">followers_<wbr>count</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_entities_tag_.tag.html#icon_url" class="tsd-kind-icon">icon_<wbr>url</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_entities_tag_.tag.html#id" class="tsd-kind-icon">id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_entities_tag_.tag.html#items_count" class="tsd-kind-icon">items_<wbr>count</a>
 							</li>
 						</ul>
 					</li>

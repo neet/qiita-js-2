@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Team | qiita-js-2</title>
+	<title>TeamInvitation | qiita-js-2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,16 +54,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_qiita_.html">&quot;qiita&quot;</a>
+					<a href="../modules/_entities_teaminvitation_.html">&quot;entities/TeamInvitation&quot;</a>
 				</li>
 				<li>
-					<a href="../classes/_qiita_.qiita.html">Qiita</a>
-				</li>
-				<li>
-					<a href="_qiita_.qiita.team.html">Team</a>
+					<a href="_entities_teaminvitation_.teaminvitation.html">TeamInvitation</a>
 				</li>
 			</ul>
-			<h1>Interface Team</h1>
+			<h1>Interface TeamInvitation</h1>
 		</div>
 	</div>
 </header>
@@ -74,7 +71,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Team</span>
+						<span class="target">TeamInvitation</span>
 					</li>
 				</ul>
 			</section>
@@ -85,9 +82,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_qiita_.qiita.team.html#active" class="tsd-kind-icon">active</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_qiita_.qiita.team.html#id" class="tsd-kind-icon">id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_qiita_.qiita.team.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_entities_teaminvitation_.teaminvitation.html#email" class="tsd-kind-icon">email</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_entities_teaminvitation_.teaminvitation.html#url" class="tsd-kind-icon">url</a></li>
 							</ul>
 						</section>
 					</div>
@@ -96,47 +92,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="active" class="tsd-anchor"></a>
-					<h3>active</h3>
-					<div class="tsd-signature tsd-kind-icon">active<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="email" class="tsd-anchor"></a>
+					<h3>email</h3>
+					<div class="tsd-signature tsd-kind-icon">email<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/neet/qiita-js-2/blob/9af8500/src/qiita.ts#L79">qiita.ts:79</a></li>
+							<li>Defined in <a href="https://github.com/neet/qiita-js-2/blob/abfd773/src/entities/TeamInvitation.ts#L3">entities/TeamInvitation.ts:3</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>チームが利用可能な状態かどうか</p>
+							<p>招待中のメンバーのemailアドレスです。</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="id" class="tsd-anchor"></a>
-					<h3>id</h3>
-					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="url" class="tsd-anchor"></a>
+					<h3>url</h3>
+					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/neet/qiita-js-2/blob/9af8500/src/qiita.ts#L81">qiita.ts:81</a></li>
+							<li>Defined in <a href="https://github.com/neet/qiita-js-2/blob/abfd773/src/entities/TeamInvitation.ts#L5">entities/TeamInvitation.ts:5</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>チームの一意なID</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/neet/qiita-js-2/blob/9af8500/src/qiita.ts#L83">qiita.ts:83</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>チームに設定されている名前を表します。</p>
+							<p>招待用URLです。有効期限は1日です。</p>
 						</div>
 					</div>
 				</section>
@@ -149,10 +130,70 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_index_.html">"index"</a>
+						<a href="../modules/_client_gateway_.html">"client/<wbr>Gateway"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_client_qiita_.html">"client/<wbr>Qiita"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_accesstoken_.html">"entities/<wbr>Access<wbr>Token"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_authenticateduser_.html">"entities/<wbr>Authenticated<wbr>User"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_comment_.html">"entities/<wbr>Comment"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_expandedtemplate_.html">"entities/<wbr>Expanded<wbr>Template"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_group_.html">"entities/<wbr>Group"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_item_.html">"entities/<wbr>Item"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_like_.html">"entities/<wbr>Like"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_project_.html">"entities/<wbr>Project"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_reaction_.html">"entities/<wbr>Reaction"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_tag_.html">"entities/<wbr>Tag"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_tagging_.html">"entities/<wbr>Tagging"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_team_.html">"entities/<wbr>Team"</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_qiita_.html">"qiita"</a>
+						<a href="../modules/_entities_teaminvitation_.html">"entities/<wbr>Team<wbr>Invitation"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_template_.html">"entities/<wbr>Template"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_entities_user_.html">"entities/<wbr>User"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_errors_qiitaerror_.html">"errors/<wbr>Qiita<wbr>Error"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_errors_qiitanotfounderror_.html">"errors/<wbr>Qiita<wbr>Not<wbr>Found<wbr>Error"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_errors_qiitaurlresolveerror_.html">"errors/<wbr>QiitaURLResolve<wbr>Error"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_errors_qiitaunauthorizederror_.html">"errors/<wbr>Qiita<wbr>Unauthorized<wbr>Error"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_index_.html">"index"</a>
 					</li>
 				</ul>
 			</nav>
@@ -160,22 +201,14 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_qiita_.qiita.html" class="tsd-kind-icon">Qiita</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_entities_teaminvitation_.teaminvitation.html" class="tsd-kind-icon">Team<wbr>Invitation</a>
 						<ul>
-							<li class="current tsd-kind-interface tsd-parent-kind-class">
-								<a href="_qiita_.qiita.team.html" class="tsd-kind-icon">Team</a>
-								<ul>
-									<li class=" tsd-kind-property tsd-parent-kind-interface">
-										<a href="_qiita_.qiita.team.html#active" class="tsd-kind-icon">active</a>
-									</li>
-									<li class=" tsd-kind-property tsd-parent-kind-interface">
-										<a href="_qiita_.qiita.team.html#id" class="tsd-kind-icon">id</a>
-									</li>
-									<li class=" tsd-kind-property tsd-parent-kind-interface">
-										<a href="_qiita_.qiita.team.html#name" class="tsd-kind-icon">name</a>
-									</li>
-								</ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_entities_teaminvitation_.teaminvitation.html#email" class="tsd-kind-icon">email</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_entities_teaminvitation_.teaminvitation.html#url" class="tsd-kind-icon">url</a>
 							</li>
 						</ul>
 					</li>

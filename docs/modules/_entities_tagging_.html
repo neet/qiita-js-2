@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>qiita-js-2</title>
+	<title>&quot;entities/Tagging&quot; | qiita-js-2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">qiita-js-2</a>
+					<a href="../index.html" class="title">qiita-js-2</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -51,134 +51,112 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="globals.html">Globals</a>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="_entities_tagging_.html">&quot;entities/Tagging&quot;</a>
 				</li>
 			</ul>
-			<h1> qiita-js-2</h1>
+			<h1>External module &quot;entities/Tagging&quot;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<h1 id="qiita-js-2">qiita-js-2</h1>
-				<p>Modern Qiita v2 API client for Node/Browser</p>
-				<h2 id="-">使い方</h2>
-				<h3 id="qiita-js-2-"><code>qiita-js-2</code>をインストールする</h3>
-				<p><strong>NPM:</strong></p>
-				<pre><code>npm <span class="hljs-selector-tag">i</span> qiita-js-<span class="hljs-number">2</span> --save</code></pre><p><strong>Yarn:</strong></p>
-				<pre><code>yarn <span class="hljs-keyword">add</span><span class="bash"> qiita-js-2</span></code></pre><h3 id="-">トークンを取得</h3>
-				<p>Qiitaの<a href="https://qiita.com/settings/applications">アプリケーションページ</a>を開き，新しいアクセストークンを発行します．</p>
-				<p><img src="https://i.imgur.com/LPtgosR.png" alt="新しいアクセストークンを発行"></p>
-				<p>アクセストークンを発行します．説明と，必要に応じてスコープを付与し発行してください．</p>
-				<p><img src="https://i.imgur.com/7yxJWmw.png" alt="アクセストークンの発行"></p>
-				<p>生成されたアクセストークンをコピーして保存してください．このトークンは以下で必要です</p>
-				<p><img src="https://i.imgur.com/l6V6qmg.png" alt="アクセストークン"></p>
-				<h3 id="-">利用する</h3>
-				<pre><code class="language-ts"><span class="hljs-comment">// Node.js</span>
-<span class="hljs-keyword">const</span> Qiita = <span class="hljs-built_in">require</span>(<span class="hljs-string">'qiita-js-2'</span>).default;
-<span class="hljs-comment">// TypeScript あるいは Babel</span>
-<span class="hljs-keyword">import</span> Qiita <span class="hljs-keyword">from</span> <span class="hljs-string">'qiita-js-2'</span>;
-
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> Qiita();
-client.setToken(<span class="hljs-string">'ここにトークンを指定します'</span>);
-
-<span class="hljs-comment">// 例: ユーザーを取得する</span>
-client.fetchUser(<span class="hljs-string">'neetshin'</span>).then(<span class="hljs-function">(<span class="hljs-params">user</span>) =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(user);
-})
-
-<span class="hljs-comment">// 例: 新規投稿をする</span>
-client.createItem({
-  title: <span class="hljs-string">'新しい投稿'</span>,
-  body:  <span class="hljs-string">'これは新しい投稿です'</span>,
-  tags:  [{ name: <span class="hljs-string">'Test'</span>, version: <span class="hljs-string">'0.0.1'</span> }],
-  gist:    <span class="hljs-literal">false</span>,
-  twitter: <span class="hljs-literal">false</span>,
-  <span class="hljs-keyword">private</span>: <span class="hljs-literal">false</span>,
-}).then(<span class="hljs-function">(<span class="hljs-params">newItem</span>) =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(newItem);
-});</code></pre>
-				<p>利用可能なすべてのメソッドのドキュメントは<a href="https://neet.github.io/qiita-js-2/classes/_qiita_.qiita.html">こちらからご覧いただけます．</a></p>
-			</div>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_entities_tagging_.tagging.html" class="tsd-kind-icon">Tagging</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_client_gateway_.html">"client/<wbr>Gateway"</a>
+						<a href="_client_gateway_.html">"client/<wbr>Gateway"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_client_qiita_.html">"client/<wbr>Qiita"</a>
+						<a href="_client_qiita_.html">"client/<wbr>Qiita"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_entities_accesstoken_.html">"entities/<wbr>Access<wbr>Token"</a>
+						<a href="_entities_accesstoken_.html">"entities/<wbr>Access<wbr>Token"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_entities_authenticateduser_.html">"entities/<wbr>Authenticated<wbr>User"</a>
+						<a href="_entities_authenticateduser_.html">"entities/<wbr>Authenticated<wbr>User"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_entities_comment_.html">"entities/<wbr>Comment"</a>
+						<a href="_entities_comment_.html">"entities/<wbr>Comment"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_entities_expandedtemplate_.html">"entities/<wbr>Expanded<wbr>Template"</a>
+						<a href="_entities_expandedtemplate_.html">"entities/<wbr>Expanded<wbr>Template"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_entities_group_.html">"entities/<wbr>Group"</a>
+						<a href="_entities_group_.html">"entities/<wbr>Group"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_entities_item_.html">"entities/<wbr>Item"</a>
+						<a href="_entities_item_.html">"entities/<wbr>Item"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_entities_like_.html">"entities/<wbr>Like"</a>
+						<a href="_entities_like_.html">"entities/<wbr>Like"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_entities_project_.html">"entities/<wbr>Project"</a>
+						<a href="_entities_project_.html">"entities/<wbr>Project"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_entities_reaction_.html">"entities/<wbr>Reaction"</a>
+						<a href="_entities_reaction_.html">"entities/<wbr>Reaction"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_entities_tag_.html">"entities/<wbr>Tag"</a>
+						<a href="_entities_tag_.html">"entities/<wbr>Tag"</a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="_entities_tagging_.html">"entities/<wbr>Tagging"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_entities_tagging_.html">"entities/<wbr>Tagging"</a>
+						<a href="_entities_team_.html">"entities/<wbr>Team"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_entities_team_.html">"entities/<wbr>Team"</a>
+						<a href="_entities_teaminvitation_.html">"entities/<wbr>Team<wbr>Invitation"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_entities_teaminvitation_.html">"entities/<wbr>Team<wbr>Invitation"</a>
+						<a href="_entities_template_.html">"entities/<wbr>Template"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_entities_template_.html">"entities/<wbr>Template"</a>
+						<a href="_entities_user_.html">"entities/<wbr>User"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_entities_user_.html">"entities/<wbr>User"</a>
+						<a href="_errors_qiitaerror_.html">"errors/<wbr>Qiita<wbr>Error"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_errors_qiitaerror_.html">"errors/<wbr>Qiita<wbr>Error"</a>
+						<a href="_errors_qiitanotfounderror_.html">"errors/<wbr>Qiita<wbr>Not<wbr>Found<wbr>Error"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_errors_qiitanotfounderror_.html">"errors/<wbr>Qiita<wbr>Not<wbr>Found<wbr>Error"</a>
+						<a href="_errors_qiitaurlresolveerror_.html">"errors/<wbr>QiitaURLResolve<wbr>Error"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_errors_qiitaurlresolveerror_.html">"errors/<wbr>QiitaURLResolve<wbr>Error"</a>
+						<a href="_errors_qiitaunauthorizederror_.html">"errors/<wbr>Qiita<wbr>Unauthorized<wbr>Error"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_errors_qiitaunauthorizederror_.html">"errors/<wbr>Qiita<wbr>Unauthorized<wbr>Error"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_index_.html">"index"</a>
+						<a href="_index_.html">"index"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_entities_tagging_.tagging.html" class="tsd-kind-icon">Tagging</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -247,7 +225,7 @@ client.createItem({
 	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
