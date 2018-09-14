@@ -7,15 +7,14 @@
     "baseUrl": "./",
     "lib": [
       "es6",
-      "dom"
+      "dom",
+      "esnext.asynciterable"
     ],
     "moduleResolution": "node",
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
     "noImplicitReturns": true,
-    "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strict": true,
