@@ -1,6 +1,6 @@
 # qiita-js-2
 [![npm](https://img.shields.io/npm/v/qiita-js-2.svg)](https://www.npmjs.com/package/qiita-js-2)
-[![Build Status](https://travis-ci.org/neet/qiita-js-2.svg?branch=master)](https://travis-ci.org/neet/qiita-js-2)
+[![Build Status](https://travis-ci.com/neet/qiita-js-2.svg?branch=master)](https://travis-ci.com/neet/qiita-js-2)
 [![Maintainability](https://api.codeclimate.com/v1/badges/9eb161f2bd4b1f062c9c/maintainability)](https://codeclimate.com/github/neet/qiita-js-2/maintainability)
 
 Modern Qiita v2 API client for Node/Browser
