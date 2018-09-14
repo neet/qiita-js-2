@@ -1,50 +1,86 @@
 import nodeFetch from 'node-fetch';
 import * as querystring from 'querystring';
 
-export class Gateway {
+import { QiitaError } from '../errors/QiitaError';
+import { QiitaNotFoundError } from '../errors/QiitaNotFoundError';
+import { QiitaUnauthorizedError } from '../errors/QiitaUnauthorizedError';
+import { QiitaURLResolveError } from '../errors/QiitaURLResolveError';
 
-  /** ユーザーのアクセストークンです */
-  private token = '';
+export abstract class Gateway {
 
   /** Qiitaのホストです */
-  private endpoint = 'https://qiita.com';
+  protected url = 'https://qiita.com';
+
+  /** ユーザーのアクセストークンです */
+  protected token = '';
 
   /** APIバージョンを示すロケーションです */
-  private version = '/api/v2';
+  protected version = '/api/v2';
 
   /**
-   * @param options Optional params
-   * @param options.url Rest API URL of the instance
-   * @param options.streamingUrl Streaming API URL of the instance
-   * @param options.token API token of the user
+   * @param options オプショナルなパラメーター
+   * @param options.url Qiitaのホストです
+   * @param options.version APIバージョンを示すロケーションです
+   * @param options.token ユーザーのアクセストークンです
    */
-  constructor (options: { url?: string, streamingUrl?: string, token?: string }) {
-    if (options) {
-      this.url          = options.url || '';
-      this.streamingUrl = options.streamingUrl || '';
+  constructor (options?: { url?: string, token?: string, version?: string }) {
+    if (options && options.url) {
+      this.url     = options.url;
+    }
 
-      if (options.token) {
-        this.token = options.token;
-      }
+    if (options && options.token) {
+      this.version = options.version || '';
+    }
+
+    if (options && options.token) {
+      this.token = options.token;
     }
   }
 
   /**
-   * Fetch API wrapper function
-   * @param url URL to request
-   * @param options Fetch API options
-   * @param parse Whether parse response before return
-   * @return Parsed response object
+   * Qiita APIにアクセスするためのトークンを設定します
+   * @param token トークン文字列
+   * @return 何も返しません
    */
-  protected async request (url: string, options: { [key: string]: any } = {}, parse = true): Promise<any> {
+  public setToken (token: string): void {
+    this.token = token;
+  }
+
+  /**
+   * Qiita Teamへのエンドポイントを設定します
+   * @param url Qiitaのホスト
+   * @return 何も返しません
+   */
+  public setURL (url: string): void {
+    this.url = url;
+  }
+
+  /**
+   * Qiita APIへのパスを指定します．
+   * @param version APIへのパスの文字列 (e.g. `/api/v2`)
+   * @return 何も返しません
+   */
+  public setVersion (version: string): void {
+    this.version = version;
+  }
+
+  /**
+   * Fetch APIのラッパー関数です
+   * @param url リクエストするURLです
+   * @param options Fetch APIの第二引数に渡されるオプションです
+   * @return パースされたJSONオブジェクトを解決するPromiseです
+   */
+  protected async request <T> (url: string, options: { [key: string]: any } = {}): Promise<T> {
     if ( !options.headers ) {
       options.headers = {};
     }
 
-    options.headers['Content-Type']  = 'application/json';
+    if (!options.headers['Content-Type']) {
+      options.headers['Content-Type']  = 'application/json';
+    }
 
     if ( !this.url ) {
-      throw new MastodonURLResolveError('REST API URL has not been specified, Use Mastodon.setUrl to set your instance\'s URL');
+      throw new QiitaURLResolveError('Qiitaのホストが指定されていません。`Qiita.setURL` でAPIのホストを指定してからメソッドを呼び出してください。');
     }
 
     if ( this.token ) {
@@ -55,24 +91,18 @@ export class Gateway {
       ? await nodeFetch(url, options)
       : await fetch(url, options);
 
-    if ( !parse ) {
-      return response;
-    }
-
     const data = await response.json();
 
     if (response.ok) {
-      return data;
+      return data as T;
     } else {
       switch (response.status) {
         case 401:
-          throw new MastodonUnauthorizedError(data.error);
+          throw new QiitaUnauthorizedError(data.error);
         case 404:
-          throw new MastodonNotFoundError(data.error);
-        case 429:
-          throw new MastodonRatelimitError(data.error);
+          throw new QiitaNotFoundError(data.error);
         default:
-          throw new MastodonError('MastodonError', data.error || 'Unexpected error occurred');
+          throw new QiitaError('QiitaError', data.error || 'Qiita APIのリクエスト中に予期せぬエラーが発生しました');
       }
     }
   }
@@ -82,10 +112,9 @@ export class Gateway {
    * @param url URL to request
    * @param params Query strings
    * @param options Fetch API options
-   * @param parse Whether parse response before return
    */
-  protected get <T> (url: string, params = {}, options = {}, parse = true): Promise<T> {
-    return this.request(url + (Object.keys(params).length ? '?' + querystring.stringify(params) : ''), { method: 'GET', ...options }, parse);
+  protected get <T> (url: string, params = {}, options = {}): Promise<T> {
+    return this.request(url + (Object.keys(params).length ? '?' + querystring.stringify(params) : ''), { method: 'GET', ...options });
   }
 
   /**
@@ -93,10 +122,9 @@ export class Gateway {
    * @param url URL to request
    * @param body Payload
    * @param options Fetch API options
-   * @param parse Whether parse response before return
    */
-  protected post <T> (url: string, body = {}, options = {}, parse = true): Promise<T> {
-    return this.request(url, { method: 'POST', body: JSON.stringify(body), ...options }, parse);
+  protected post <T> (url: string, body = {}, options = {}): Promise<T> {
+    return this.request(url, { method: 'POST', body: JSON.stringify(body), ...options });
   }
 
   /**
@@ -104,10 +132,9 @@ export class Gateway {
    * @param url URL to request
    * @param body Payload
    * @param options Fetch API options
-   * @param parse Whether parse response before return
    */
-  protected put <T> (url: string, body = {}, options = {}, parse = true): Promise<T> {
-    return this.request(url, { method: 'PUT', body: JSON.stringify(body), ...options }, parse);
+  protected put <T> (url: string, body = {}, options = {}): Promise<T> {
+    return this.request(url, { method: 'PUT', body: JSON.stringify(body), ...options });
   }
 
   /**
@@ -115,10 +142,9 @@ export class Gateway {
    * @param url URL to request
    * @param body Payload
    * @param options Fetch API options
-   * @param parse Whether parse response before return
    */
-  protected delete <T> (url: string, body = {}, options = {}, parse = true): Promise<T> {
-    return this.request(url, { method: 'DELETE', body: JSON.stringify(body), ...options }, parse);
+  protected delete <T> (url: string, body = {}, options = {}): Promise<T> {
+    return this.request(url, { method: 'DELETE', body: JSON.stringify(body), ...options });
   }
 
   /**
@@ -126,9 +152,8 @@ export class Gateway {
    * @param url URL to request
    * @param body Payload
    * @param options Fetch API options
-   * @param parse Whether parse response before return
    */
-  protected patch <T> (url: string, body = {}, options = {}, parse = true): Promise<T> {
-    return this.request(url, { method: 'PATCH', body: JSON.stringify(body), ...options }, parse);
+  protected patch <T> (url: string, body = {}, options = {}): Promise<T> {
+    return this.request(url, { method: 'PATCH', body: JSON.stringify(body), ...options });
   }
 }
