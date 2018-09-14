@@ -2,7 +2,7 @@
 Modern Qiita v2 API client for Node/Browser
 
 ## 使い方
-### `qiita-js-2`をインストールする
+### パッケージををインストール
 
 **NPM:**
 ```
@@ -15,27 +15,28 @@ yarn add qiita-js-2
 ```
 
 ### トークンを取得
-Qiitaの[アプリケーションページ](https://qiita.com/settings/applications)を開き，新しいアクセストークンを発行します．
+Qiitaの[アプリケーションページ](https://qiita.com/settings/applications)を開き、新しいアクセストークンを発行します。
 
 ![新しいアクセストークンを発行](https://i.imgur.com/LPtgosR.png)
 
-アクセストークンを発行します．説明と，必要に応じてスコープを付与し発行してください．
+アクセストークンを発行します。説明と、必要に応じてスコープを付与し発行してください。
 
 ![アクセストークンの発行](https://i.imgur.com/7yxJWmw.png)
 
-生成されたアクセストークンをコピーして保存してください．このトークンは以下で必要です
+生成されたアクセストークンをコピーして保存してください。このトークンは以下で利用します。
 
 ![アクセストークン](https://i.imgur.com/l6V6qmg.png)
 
 ### 利用する
 ```ts
 // Node.js
-const Qiita = require('qiita-js-2').default;
+const { Qiita } = require('qiita-js-2');
 // TypeScript あるいは Babel
-import Qiita from 'qiita-js-2';
+import { Qiita } from 'qiita-js-2';
 
-const client = new Qiita();
-client.setToken('ここにトークンを指定します');
+const client = new Qiita({
+  token: 'ここにトークンを指定します',
+});
 
 // 例: ユーザーを取得する
 client.fetchUser('neetshin').then((user) => {
@@ -55,4 +56,4 @@ client.createItem({
 });
 ```
 
-利用可能なすべてのメソッドのドキュメントは[こちらからご覧いただけます．](https://neet.github.io/qiita-js-2/classes/_qiita_.qiita.html)
+利用可能なすべてのメソッドのドキュメントは[こちらからご覧いただけます](https://neet.github.io/qiita-js-2/classes/_client_qiita_.qiita.html)。
