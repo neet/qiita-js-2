@@ -28,8 +28,8 @@ export abstract class Gateway {
       this.url     = options.url;
     }
 
-    if (options && options.token) {
-      this.version = options.version || '';
+    if (options && options.version) {
+      this.version = options.version;
     }
 
     if (options && options.token) {
