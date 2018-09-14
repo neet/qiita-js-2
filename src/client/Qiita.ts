@@ -12,7 +12,7 @@ import { Tagging } from '../entities/Tagging';
 import { Team } from '../entities/Team';
 import { TeamInvitation } from '../entities/TeamInvitation';
 import { Template } from '../entities/Template';
-import { User } from '../entities/user';
+import { User } from '../entities/User';
 
 export class Qiita extends Gateway {
 
