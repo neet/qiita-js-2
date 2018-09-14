@@ -50,8 +50,8 @@ export class Qiita extends Gateway {
    * @param code リダイレクト用のURLに付与された、アクセストークンと交換するための文字列
    * @return アクセストークン
    */
-  public fetchAccessToken = (clientId: string, clientSecret: string, code: string): Promise<AccessToken> => {
-    return this.post(`${this.url}${this.version}/access_tokens`, {
+  public fetchAccessToken = (clientId: string, clientSecret: string, code: string) => {
+    return this.post<AccessToken>(`${this.url}${this.version}/access_tokens`, {
       client_id: clientId,
       client_secret: clientSecret,
       code,
@@ -63,8 +63,8 @@ export class Qiita extends Gateway {
    * @param token アクセストークン
    * @return 空のオブジェクト
    */
-  public deleteAccessToken = (token: string): Promise<{}> => {
-    return this.delete(`${this.url}${this.version}/access_tokens/${token}`);
+  public deleteAccessToken = (token: string) => {
+    return this.delete<void>(`${this.url}${this.version}/access_tokens/${token}`);
   }
 
   /**
@@ -72,8 +72,8 @@ export class Qiita extends Gateway {
    * @param commentId コメントのID
    * @return コメントのエンティティを返します
    */
-  public fetchComment = (commentId: string): Promise<Comment> => {
-    return this.get(`${this.url}${this.version}/comments/${commentId}`);
+  public fetchComment = (commentId: string) => {
+    return this.get<Comment>(`${this.url}${this.version}/comments/${commentId}`);
   }
 
   /**
@@ -81,8 +81,8 @@ export class Qiita extends Gateway {
    * @param commentId コメントのID
    * @param body コメントの内容を表すMarkdown形式の文字列
    */
-  public updateComment = (commentId: string, body: string): Promise<Comment> => {
-    return this.patch(`${this.url}${this.version}/comments/${commentId}`, { body });
+  public updateComment = (commentId: string, body: string) => {
+    return this.patch<Comment>(`${this.url}${this.version}/comments/${commentId}`, { body });
   }
 
   /**
@@ -90,8 +90,8 @@ export class Qiita extends Gateway {
    * @param commentId コメントのID
    * @return 空のオブジェクト
    */
-  public deleteComment = (commentId: string): Promise<{}> => {
-    return this.delete(`${this.url}${this.version}/comments/${commentId}`);
+  public deleteComment = (commentId: string) => {
+    return this.delete<void>(`${this.url}${this.version}/comments/${commentId}`);
   }
 
   /**
@@ -99,8 +99,8 @@ export class Qiita extends Gateway {
    * @param commentId コメントID
    * @return 絵文字リアクション
    */
-  public fetchCommentReactions = (commentId: string): Promise<Reaction[]> => {
-    return this.get(`${this.url}${this.version}/comments/${commentId}/reactions`);
+  public fetchCommentReactions = (commentId: string) => {
+    return this.get<Reaction[]>(`${this.url}${this.version}/comments/${commentId}/reactions`);
   }
 
   /**
@@ -109,8 +109,8 @@ export class Qiita extends Gateway {
    * @param name 絵文字の識別子
    * @return 絵文字リアクション
    */
-  public createCommentReaction = (commentId: string, name: string): Promise<Reaction> => {
-    return this.post(`${this.url}${this.version}/comments/${commentId}/reactions`, { name });
+  public createCommentReaction = (commentId: string, name: string) => {
+    return this.post<Reaction>(`${this.url}${this.version}/comments/${commentId}/reactions`, { name });
   }
 
   /**
@@ -119,8 +119,8 @@ export class Qiita extends Gateway {
    * @param name 絵文字の識別子
    * @return 絵文字リアクション
    */
-  public deleteCommentReaction = (commentId: string, name: string): Promise<Reaction> => {
-    return this.delete(`${this.url}${this.version}/comments/${commentId}/reactions`, { name });
+  public deleteCommentReaction = (commentId: string, name: string) => {
+    return this.delete<Reaction>(`${this.url}${this.version}/comments/${commentId}/reactions`, { name });
   }
 
   /**
@@ -143,8 +143,8 @@ export class Qiita extends Gateway {
    * @param tagId タグのID
    * @return タグ
    */
-  public fetchTag = (tagId: string): Promise<Tag> => {
-    return this.get(`${this.url}${this.version}/tags/${tagId}`);
+  public fetchTag = (tagId: string) => {
+    return this.get<Tag>(`${this.url}${this.version}/tags/${tagId}`);
   }
 
   /**
@@ -152,8 +152,8 @@ export class Qiita extends Gateway {
    * @param tagId タグのID
    * @return タグ
    */
-  public checkIfFollowingTag = (tagId: string): Promise<Tag> => {
-    return this.get(`${this.url}${this.version}/tags/${tagId}/following`);
+  public checkIfFollowingTag = (tagId: string) => {
+    return this.get<Tag>(`${this.url}${this.version}/tags/${tagId}/following`);
   }
 
   /**
@@ -161,8 +161,8 @@ export class Qiita extends Gateway {
    * @param tagId タグのID
    * @return 空のオブジェクト
    */
-  public followTag = (tagId: string): Promise<Tag> => {
-    return this.put(`${this.url}${this.version}/tags/${tagId}/following`);
+  public followTag = (tagId: string) => {
+    return this.put<Tag>(`${this.url}${this.version}/tags/${tagId}/following`);
   }
 
   /**
@@ -170,8 +170,8 @@ export class Qiita extends Gateway {
    * @param tagId タグのID
    * @return 空のオブジェクト
    */
-  public unfollowTag = (tagId: string): Promise<{}> => {
-    return this.delete(`${this.url}${this.version}/tags/${tagId}/following`);
+  public unfollowTag = (tagId: string) => {
+    return this.delete<void>(`${this.url}${this.version}/tags/${tagId}/following`);
   }
 
   /**
@@ -206,8 +206,8 @@ export class Qiita extends Gateway {
    * @param tempalteId テンプレートID
    * @return テンプレート
    */
-  public fetchTempalte = (templateId: string): Promise<Template> => {
-    return this.get(`${this.url}${this.version}/templates/${templateId}`);
+  public fetchTempalte = (templateId: string) => {
+    return this.get<Template>(`${this.url}${this.version}/templates/${templateId}`);
   }
 
   /**
@@ -218,8 +218,8 @@ export class Qiita extends Gateway {
    * @param title 生成される投稿のタイトルの雛形
    * @return テンプレート
    */
-  public createTemplate = (body: string, name: string, tags: Tagging[], title: string): Promise<Template> => {
-    return this.post(`${this.url}${this.version}/templates`, { body, name, tags, title });
+  public createTemplate = (body: string, name: string, tags: Tagging[], title: string) => {
+    return this.post<Template>(`${this.url}${this.version}/templates`, { body, name, tags, title });
   }
 
   /**
@@ -230,8 +230,8 @@ export class Qiita extends Gateway {
    * @param title 生成される投稿のタイトルの雛形
    * @return テンプレート
    */
-  public updateTempalte = (body: string, name: string, tags: Tagging[], title: string): Promise<Template> => {
-    return this.patch(`${this.url}${this.version}/templates`, { body, name, tags, title });
+  public updateTempalte = (body: string, name: string, tags: Tagging[], title: string) => {
+    return this.patch<Template>(`${this.url}${this.version}/templates`, { body, name, tags, title });
   }
 
   /**
@@ -239,8 +239,8 @@ export class Qiita extends Gateway {
    * @param templateId テンプレートID
    * @return 空のオブジェクト
    */
-  public deleteTemplate = (templateId: string): Promise<{}> => {
-    return this.delete(`${this.url}${this.version}/templates/${templateId}`);
+  public deleteTemplate = (templateId: string) => {
+    return this.delete<void>(`${this.url}${this.version}/templates/${templateId}`);
   }
 
   /**
@@ -261,8 +261,8 @@ export class Qiita extends Gateway {
    * @param projectId プロジェクトID
    * @return プロジェクト
    */
-  public fetchProject = (projectId: string): Promise<Project> => {
-    return this.get(`${this.url}${this.version}/projects/${projectId}`);
+  public fetchProject = (projectId: string) => {
+    return this.get<Project>(`${this.url}${this.version}/projects/${projectId}`);
   }
 
   /**
@@ -273,8 +273,8 @@ export class Qiita extends Gateway {
    * @param tags 投稿に付いたタグ一覧
    * @return プロジェクト
    */
-  public createProject = (archived: boolean, body: string, name: string, tags: Tagging[]): Promise<Project> => {
-    return this.post(`${this.url}${this.version}/projects`, { archived, body, name, tags });
+  public createProject = (archived: boolean, body: string, name: string, tags: Tagging[]) => {
+    return this.post<Project>(`${this.url}${this.version}/projects`, { archived, body, name, tags });
   }
 
   /**
@@ -285,8 +285,8 @@ export class Qiita extends Gateway {
    * @param tags 投稿に付いたタグ一覧
    * @return プロジェクト
    */
-  public updateProject = (archived: boolean, body: string, name: string, tags: Tagging[]): Promise<Project> => {
-    return this.patch(`${this.url}${this.version}/projects`, { archived, body, name, tags });
+  public updateProject = (archived: boolean, body: string, name: string, tags: Tagging[]) => {
+    return this.patch<Project>(`${this.url}${this.version}/projects`, { archived, body, name, tags });
   }
 
   /**
@@ -294,8 +294,8 @@ export class Qiita extends Gateway {
    * @param projectId プロジェクトID
    * @return 空のオブジェクト
    */
-  public deleteProject = (projectId: string): Promise<{}> => {
-    return this.delete(`${this.url}${this.version}/projects/${projectId}`);
+  public deleteProject = (projectId: string) => {
+    return this.delete<void>(`${this.url}${this.version}/projects/${projectId}`);
   }
 
   /**
@@ -303,8 +303,8 @@ export class Qiita extends Gateway {
    * @param projectId プロジェクトのID
    * @return コメント一覧
    */
-  public fetchProjectComments = (projectId: string): Promise<Comment[]> => {
-    return this.get(`${this.url}${this.version}/projects/${projectId}/comments`);
+  public fetchProjectComments = (projectId: string) => {
+    return this.get<Comment[]>(`${this.url}${this.version}/projects/${projectId}/comments`);
   }
 
   /**
@@ -313,8 +313,8 @@ export class Qiita extends Gateway {
    * @param body コメントの内容を表すMarkdown形式の文字列
    * @return 投稿したコメント
    */
-  public createProjectComment = (projectId: string, body: string): Promise<Comment[]> => {
-    return this.post(`${this.url}${this.version}/projects/${projectId}/comments`, { body });
+  public createProjectComment = (projectId: string, body: string) => {
+    return this.post<Comment[]>(`${this.url}${this.version}/projects/${projectId}/comments`, { body });
   }
 
   /**
@@ -322,8 +322,8 @@ export class Qiita extends Gateway {
    * @param projectId プロジェクトID
    * @return 絵文字リアクション一覧
    */
-  public fetchProjectReactions = (projectId: string): Promise<Reaction[]> => {
-    return this.get(`${this.url}${this.version}/projects/${projectId}/reactions`);
+  public fetchProjectReactions = (projectId: string) => {
+    return this.get<Reaction[]>(`${this.url}${this.version}/projects/${projectId}/reactions`);
   }
 
   /**
@@ -332,8 +332,8 @@ export class Qiita extends Gateway {
    * @param name 絵文字の識別子
    * @return 絵文字リアクション
    */
-  public createProjectReaction = (projectId: string, name: string): Promise<Reaction> => {
-    return this.post(`${this.url}${this.version}/projects/${projectId}/reactions`, { name });
+  public createProjectReaction = (projectId: string, name: string) => {
+    return this.post<Reaction>(`${this.url}${this.version}/projects/${projectId}/reactions`, { name });
   }
 
   /**
@@ -342,8 +342,8 @@ export class Qiita extends Gateway {
    * @param name 絵文字の識別子
    * @return 絵文字リアクション
    */
-  public deleteProjectReaction = (projectId: string, name: string): Promise<Reaction> => {
-    return this.delete(`${this.url}${this.version}/projects/${projectId}/reactions`, { name });
+  public deleteProjectReaction = (projectId: string, name: string) => {
+    return this.delete<Reaction>(`${this.url}${this.version}/projects/${projectId}/reactions`, { name });
   }
 
   /**
@@ -364,8 +364,8 @@ export class Qiita extends Gateway {
    * @param userId ユーザーID
    * @return ユーザー
    */
-  public fetchUser = (userId: string): Promise<User> => {
-    return this.get(`${this.url}${this.version}/users/${userId}`);
+  public fetchUser = (userId: string) => {
+    return this.get<User>(`${this.url}${this.version}/users/${userId}`);
   }
 
   /**
@@ -443,8 +443,8 @@ export class Qiita extends Gateway {
    * @param userId ユーザーID
    * @return 空のオブジェクト
    */
-  public checkIfFollowingUser = (userId: string): Promise<{}> => {
-    return this.get(`${this.url}${this.version}/users/${userId}/following`);
+  public checkIfFollowingUser = (userId: string) => {
+    return this.get<void>(`${this.url}${this.version}/users/${userId}/following`);
   }
 
   /**
@@ -452,8 +452,8 @@ export class Qiita extends Gateway {
    * @param userId ユーザーID
    * @return 空のオブジェクト
    */
-  public followUser = (userId: string): Promise<{}> => {
-    return this.put(`${this.url}${this.version}/users/${userId}/following`);
+  public followUser = (userId: string) => {
+    return this.put<void>(`${this.url}${this.version}/users/${userId}/following`);
   }
 
   /**
@@ -461,8 +461,8 @@ export class Qiita extends Gateway {
    * @param userId ユーザーID
    * @return 空のオブジェクト
    */
-  public unfollowUser = (userId: string): Promise<{}> => {
-    return this.delete(`${this.url}${this.version}/users/${userId}/following`);
+  public unfollowUser = (userId: string) => {
+    return this.delete<void>(`${this.url}${this.version}/users/${userId}/following`);
   }
 
   /**
@@ -485,8 +485,8 @@ export class Qiita extends Gateway {
    * @param itemId 投稿ID
    * @return 投稿
    */
-  public fetchItem = (itemId: string): Promise<Item> => {
-    return this.get(`${this.url}${this.version}/items/${itemId}`);
+  public fetchItem = (itemId: string) => {
+    return this.get<Item>(`${this.url}${this.version}/items/${itemId}`);
   }
 
   /**
@@ -510,8 +510,8 @@ export class Qiita extends Gateway {
     tags: Tagging;
     title: string;
     tweet: boolean;
-  }): Promise<Item> => {
-    return this.post(`${this.url}${this.version}/items`, {
+  }) => {
+    return this.post<Item>(`${this.url}${this.version}/items`, {
       body: params.body,
       coediting: params.coediting,
       gist: params.gist,
@@ -540,8 +540,8 @@ export class Qiita extends Gateway {
     private: boolean;
     tags: Tagging;
     title: string;
-  }): Promise<Item> => {
-    return this.patch(`${this.url}${this.version}/items/${itemId}`, {
+  }) => {
+    return this.patch<Item>(`${this.url}${this.version}/items/${itemId}`, {
       body: params.body,
       coediting: params.coediting,
       group_url_name: params.groupUrlName,
@@ -556,8 +556,8 @@ export class Qiita extends Gateway {
    * @param itemId 投稿ID
    * @return 空のオブジェクト
    */
-  public deleteItem = (itemId: string): Promise<{}> => {
-    return this.delete(`${this.url}${this.version}/items/${itemId}`);
+  public deleteItem = (itemId: string) => {
+    return this.delete<void>(`${this.url}${this.version}/items/${itemId}`);
   }
 
   /**
@@ -565,8 +565,8 @@ export class Qiita extends Gateway {
    * @param itemId 投稿ID
    * @return 空のオブジェクト
    */
-  public checkIfLikedItem = (itemId: string): Promise<{}> => {
-    return this.get(`${this.url}${this.version}/items/${itemId}/like`);
+  public checkIfLikedItem = (itemId: string) => {
+    return this.get<void>(`${this.url}${this.version}/items/${itemId}/like`);
   }
 
   /**
@@ -574,8 +574,8 @@ export class Qiita extends Gateway {
    * @param itemId 投稿ID
    * @return 空のオブジェクト
    */
-  public likeItem = (itemId: string): Promise<{}> => {
-    return this.put(`${this.url}${this.version}/items/${itemId}/like`);
+  public likeItem = (itemId: string) => {
+    return this.put<void>(`${this.url}${this.version}/items/${itemId}/like`);
   }
 
   /**
@@ -583,8 +583,8 @@ export class Qiita extends Gateway {
    * @param itemId 投稿ID
    * @return 空のオブジェクト
    */
-  public unlikeItem = (itemId: string): Promise<{}> => {
-    return this.delete(`${this.url}${this.version}/items/${itemId}/like`);
+  public unlikeItem = (itemId: string) => {
+    return this.delete<void>(`${this.url}${this.version}/items/${itemId}/like`);
   }
 
   /**
@@ -592,8 +592,8 @@ export class Qiita extends Gateway {
    * @param itemId 投稿ID
    * @return 空のオブジェクト
    */
-  public checkIfStockedItem = (itemId: string): Promise<{}> => {
-    return this.get(`${this.url}${this.version}/items/${itemId}/stock`);
+  public checkIfStockedItem = (itemId: string) => {
+    return this.get<void>(`${this.url}${this.version}/items/${itemId}/stock`);
   }
 
   /**
@@ -601,8 +601,8 @@ export class Qiita extends Gateway {
    * @param itemId 投稿ID
    * @return 空のオブジェクト
    */
-  public stockItem = (itemId: string): Promise<{}> => {
-    return this.put(`${this.url}${this.version}/items/${itemId}/stock`);
+  public stockItem = (itemId: string) => {
+    return this.put<void>(`${this.url}${this.version}/items/${itemId}/stock`);
   }
 
   /**
@@ -610,8 +610,8 @@ export class Qiita extends Gateway {
    * @param itemId 投稿ID
    * @return 空のオブジェクト
    */
-  public unstockItem = (itemId: string): Promise<{}> => {
-    return this.delete(`${this.url}${this.version}/items/${itemId}/stock`);
+  public unstockItem = (itemId: string) => {
+    return this.delete<void>(`${this.url}${this.version}/items/${itemId}/stock`);
   }
 
   /**
@@ -619,8 +619,8 @@ export class Qiita extends Gateway {
    * @param itemId 投稿ID
    * @return 絵文字リアクション
    */
-  public fetchItemReactions = (itemId: string): Promise<Reaction[]> => {
-    return this.post(`${this.url}${this.version}/items/${itemId}/reactions`);
+  public fetchItemReactions = (itemId: string) => {
+    return this.post<Reaction[]>(`${this.url}${this.version}/items/${itemId}/reactions`);
   }
 
   /**
@@ -629,8 +629,8 @@ export class Qiita extends Gateway {
    * @param name 絵文字の識別子
    * @return 絵文字リアクション
    */
-  public createItemReaction = (itemId: string, name: string): Promise<Reaction> => {
-    return this.post(`${this.url}${this.version}/items/${itemId}/reactions`, { name });
+  public createItemReaction = (itemId: string, name: string) => {
+    return this.post<Reaction>(`${this.url}${this.version}/items/${itemId}/reactions`, { name });
   }
 
   /**
@@ -639,8 +639,8 @@ export class Qiita extends Gateway {
    * @param name 絵文字の識別子
    * @return 絵文字リアクション
    */
-  public deleteItemReaction = (itemId: string, name: string): Promise<Reaction> => {
-    return this.delete(`${this.url}${this.version}/items/${itemId}/reactions`, { name });
+  public deleteItemReaction = (itemId: string, name: string) => {
+    return this.delete<Reaction>(`${this.url}${this.version}/items/${itemId}/reactions`, { name });
   }
 
   /**
@@ -648,8 +648,8 @@ export class Qiita extends Gateway {
    * @param itemId 投稿のID
    * @return いいね！エンティティを返します
    */
-  public fetchItemLikes = (itemId: string): Promise<Like[]> => {
-    return this.get(`${this.url}${this.version}/items/${itemId}/likes`);
+  public fetchItemLikes = (itemId: string) => {
+    return this.get<Like[]>(`${this.url}${this.version}/items/${itemId}/likes`);
   }
 
   /**
@@ -670,8 +670,8 @@ export class Qiita extends Gateway {
    * @param itemId 投稿のID
    * @return コメント一覧
    */
-  public fetchItemComments = (itemId: string): Promise<Comment[]> => {
-    return this.get(`${this.url}${this.version}/items/${itemId}/comments`);
+  public fetchItemComments = (itemId: string) => {
+    return this.get<Comment[]>(`${this.url}${this.version}/items/${itemId}/comments`);
   }
 
   /**
@@ -680,8 +680,8 @@ export class Qiita extends Gateway {
    * @param body コメントの内容を表すMarkdown形式の文字列
    * @return 投稿したコメント
    */
-  public createItemComment = (itemId: string, body: string): Promise<Comment[]> => {
-    return this.post(`${this.url}${this.version}/items/${itemId}/comments`, { body });
+  public createItemComment = (itemId: string, body: string) => {
+    return this.post<Comment[]>(`${this.url}${this.version}/items/${itemId}/comments`, { body });
   }
 
   /**
@@ -690,8 +690,8 @@ export class Qiita extends Gateway {
    * @param name タグを特定するための一意な名前
    * @param versions (説明なし)
    */
-  public addItemTag = (itemId: string, name: string, versions: string[]): Promise<Tagging> => {
-    return this.post(`${this.url}${this.version}/items/${itemId}/taggings`, { name, versions });
+  public addItemTag = (itemId: string, name: string, versions: string[]) => {
+    return this.post<Tagging>(`${this.url}${this.version}/items/${itemId}/taggings`, { name, versions });
   }
 
   /**
@@ -700,48 +700,48 @@ export class Qiita extends Gateway {
    * @param tagId タギングのID
    * @return 空のオブジェクト
    */
-  public removeItemTag = (itemId: string, tagId: string): Promise<{}> => {
-    return this.delete(`${this.url}${this.version}/items/${itemId}/taggings/${tagId}`);
+  public removeItemTag = (itemId: string, tagId: string) => {
+    return this.delete<void>(`${this.url}${this.version}/items/${itemId}/taggings/${tagId}`);
   }
 
   /**
    * ユーザが所属している全てのチームを、チーム作成日時の降順で返します。
    * @return チーム一覧
    */
-  public fetchTeams = (): Promise<Team[]> => {
-    return this.get(`${this.url}${this.version}/teams`);
+  public fetchTeams = () => {
+    return this.get<Team[]>(`${this.url}${this.version}/teams`);
   }
 
   /**
    * 招待中のメンバーの一覧を返します
    * @return 招待
    */
-  public fetchTeamInvitations = (): Promise<TeamInvitation> => {
-    return this.get(`${this.url}${this.version}/team_invitations`);
+  public fetchTeamInvitations = () => {
+    return this.get<TeamInvitation>(`${this.url}${this.version}/team_invitations`);
   }
 
   /**
    * チームにメンバーを招待します
    * @return 招待
    */
-  public createTeamInvitations = (): Promise<TeamInvitation> => {
-    return this.post(`${this.url}${this.version}/team_invitations`);
+  public createTeamInvitations = () => {
+    return this.post<TeamInvitation>(`${this.url}${this.version}/team_invitations`);
   }
 
   /**
    * 招待を取り消します
    * @return 空のオブジェクト
    */
-  public deleteTeamInvitation = (): Promise<{}> => {
-    return this.delete(`${this.url}${this.version}/team_invitations`);
+  public deleteTeamInvitation = () => {
+    return this.delete<void>(`${this.url}${this.version}/team_invitations`);
   }
 
   /**
    * アクセストークンに紐付いたユーザを返します。
    * @return 認証中のユーザ
    */
-  public fetchMe = (): Promise<AuthenticatedUser> => {
-    return this.get(`${this.url}${this.version}/authenticated_user`);
+  public fetchMe = () => {
+    return this.get<AuthenticatedUser>(`${this.url}${this.version}/authenticated_user`);
   }
 
   /**
