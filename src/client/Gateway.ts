@@ -108,50 +108,50 @@ export abstract class Gateway {
   }
 
   /**
-   * HTTP GET
-   * @param url URL to request
-   * @param params Query strings
-   * @param options Fetch API options
+   * HTTP GETのラッパー関数です
+   * @param url リクエストするURL
+   * @param params クエリ文字列
+   * @param options Fetch APIの第二引数になるオブジェクト
    */
   protected get <T> (url: string, params = {}, options = {}): Promise<T> {
     return this.request(url + (Object.keys(params).length ? '?' + querystring.stringify(params) : ''), { method: 'GET', ...options });
   }
 
   /**
-   * HTTP POST
-   * @param url URL to request
-   * @param body Payload
-   * @param options Fetch API options
+   * HTTP POSTのラッパー関数です
+   * @param url リクエストするURL
+   * @param body リクエストボディ
+   * @param options Fetch APIの第二引数になるオブジェクト
    */
   protected post <T> (url: string, body = {}, options = {}): Promise<T> {
     return this.request(url, { method: 'POST', body: JSON.stringify(body), ...options });
   }
 
   /**
-   * HTTP PUT
-   * @param url URL to request
-   * @param body Payload
-   * @param options Fetch API options
+   * HTTP PUTのラッパー関数です
+   * @param url リクエストするURL
+   * @param body リクエストボディ
+   * @param options Fetch APIの第二引数になるオブジェクト
    */
   protected put <T> (url: string, body = {}, options = {}): Promise<T> {
     return this.request(url, { method: 'PUT', body: JSON.stringify(body), ...options });
   }
 
   /**
-   * HTTP DELETE
-   * @param url URL to request
-   * @param body Payload
-   * @param options Fetch API options
+   * HTTP DELETEのラッパー関数です
+   * @param url リクエストするURL
+   * @param body リクエストボディ
+   * @param options Fetch APIの第二引数になるオブジェクト
    */
   protected delete <T> (url: string, body = {}, options = {}): Promise<T> {
     return this.request(url, { method: 'DELETE', body: JSON.stringify(body), ...options });
   }
 
   /**
-   * HTTP PATCH
-   * @param url URL to request
-   * @param body Payload
-   * @param options Fetch API options
+   * HTTP PATCHのラッパー関数です
+   * @param url リクエストするURL
+   * @param body リクエストボディ
+   * @param options Fetch APIの第二引数になるオブジェクト
    */
   protected patch <T> (url: string, body = {}, options = {}): Promise<T> {
     return this.request(url, { method: 'PATCH', body: JSON.stringify(body), ...options });
