@@ -51,7 +51,7 @@ export abstract class Gateway {
    * @param url Qiitaのホスト
    * @return 何も返しません
    */
-  public setURL (url: string): void {
+  public setUrl (url: string): void {
     this.url = url;
   }
 
@@ -80,7 +80,7 @@ export abstract class Gateway {
     }
 
     if ( !this.url ) {
-      throw new QiitaURLResolveError('Qiitaのホストが指定されていません。`Qiita.setURL` でAPIのホストを指定してからメソッドを呼び出してください。');
+      throw new QiitaURLResolveError('Qiitaのホストが指定されていません。`Qiita.setUrl` でAPIのホストを指定してからメソッドを呼び出してください。');
     }
 
     if ( this.token ) {
