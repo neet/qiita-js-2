@@ -24,14 +24,12 @@
   },
   "homepage": "https://github.com/neet/qiita-js-2#readme",
   "dependencies": {
-    "@types/node-fetch": "^2.1.1",
-    "@types/query-string": "^5.1.0",
-    "node-fetch": "^2.1.2",
-    "query-string": "^6.1.0",
-    "typescript": "^2.9.1"
+    "@types/node-fetch": "^2.1.2",
+    "node-fetch": "^2.2.0",
+    "typescript": "^3.0.3"
   },
   "devDependencies": {
-    "tslint": "^5.10.0",
-    "typedoc": "^0.11.1"
+    "tslint": "^5.11.0",
+    "typedoc": "^0.12.0"
   }
 }
