@@ -207,7 +207,7 @@ export class Qiita extends Gateway {
    * @return タグの配列
    */
   public searchTags = (q: string) => {
-    return this.get<SearchTagResult>(`${this.url}/api/tags`, { q });
+    return this.get<SearchTagResult[]>(`${this.url}/api/tags`, { q });
   }
 
   /**
