@@ -1,4 +1,5 @@
 import { Gateway } from './Gateway';
+import * as options from './options';
 
 import { AccessToken } from '../entities/AccessToken';
 import { AuthenticatedUser } from '../entities/AuthenticatedUser';
@@ -125,17 +126,14 @@ export class Qiita extends Gateway {
 
   /**
    * タグ一覧を作成日時の降順で返します。
-   * @param page ページ番号 (1から100まで)
-   * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
-   * @param sort 並び順 (countで投稿数順、nameで名前順)
+   * @param options.page ページ番号 (1から100まで)
+   * @param options.perPage 1ページあたりに含まれる要素数 (1から100まで)
+   * @param options.sort 並び順 (countで投稿数順、nameで名前順)
+   * @param options.q [ドキュメント記載無し]
    * @return タグ一覧を返す非同期反復可能オブジェクト
    */
-  public fetchTags = (page: string, perPage: string, sort: string) => {
-    return this.paginationGenerator<Tag[]>(`${this.url}${this.version}/tags`, {
-      page,
-      per_page: perPage,
-      sort,
-    });
+  public fetchTags = (options?: options.FetchTagsOptions) => {
+    return this.paginationGenerator<Tag[]>(`${this.url}${this.version}/tags`, options);
   }
 
   /**
