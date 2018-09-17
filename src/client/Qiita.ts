@@ -490,7 +490,7 @@ export class Qiita extends Gateway {
    * @param options.title 投稿のタイトル
    * @return 投稿
    */
-  public updateItem = (item_id: string, options: options.CreateItemOptions) => {
+  public updateItem = (item_id: string, options: options.UpdateItemOptions) => {
     return this.patch<Item>(`${this.url}${this.version}/items/${item_id}`, options);
   }
 
