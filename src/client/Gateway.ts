@@ -17,13 +17,13 @@ export abstract class Gateway {
   /** ユーザーのアクセストークンです */
   protected token = '';
 
-  /** APIバージョンを示すロケーションです */
+  /** APIバージョンを示すパスです */
   protected version = '/api/v2';
 
   /**
    * @param options オプショナルなパラメーター
    * @param options.url Qiitaのホストです
-   * @param options.version APIバージョンを示すロケーションです
+   * @param options.version APIバージョンを示すパスです
    * @param options.token ユーザーのアクセストークンです
    */
   constructor (options?: { url?: string, token?: string, version?: string }) {
@@ -50,7 +50,7 @@ export abstract class Gateway {
   }
 
   /**
-   * Qiita Teamへのエンドポイントを設定します
+   * QiitaへのURLを設定します
    * @param url Qiitaのホスト
    * @return 何も返しません
    */
@@ -68,6 +68,26 @@ export abstract class Gateway {
     // トレーリングスラッシュを削除
     this.version = version.replace(/\/$/, '');
   }
+
+  /**
+   * APIクライアントに設定されたトークンを返します
+   * トークンの取得を行うには `Qiita.fetchAccessToken` をご利用ください。
+   * @return 設定されたトークン
+   */
+  public getToken = () => this.token;
+
+  /**
+   * APIクライアントに設定されたURLを返します
+   * @return 設定されたURL
+   */
+  public getUrl = () => this.url;
+
+  /**
+   * APIクライアントに設定されたバージョンを示すパスを返します
+   * @return 設定されたパス
+   */
+  public getVersion = () => this.version;
+
 
   /**
    * Fetch APIのラッパー関数です
