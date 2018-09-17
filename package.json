@@ -3,7 +3,7 @@
   "private": false,
   "author": "neetshin",
   "license": "MIT",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Modern Qiita v2 API client for Node/Browser ",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
