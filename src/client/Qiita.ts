@@ -262,7 +262,7 @@ export class Qiita extends Gateway {
    * @param options.tags 投稿に付いたタグ一覧
    * @return プロジェクト
    */
-  public createProject = (options?: options.CreateProjectOptions) => {
+  public createProject = (options: options.CreateProjectOptions) => {
     return this.post<Project>(`${this.url}${this.version}/projects`, options);
   }
 
@@ -468,7 +468,7 @@ export class Qiita extends Gateway {
    * @param options.tweet Twitterに投稿するかどうか (Twitter連携を有効化している場合のみ有効)
    * @return 投稿
    */
-  public createItem = (options?: options.CreateItemOptions) => {
+  public createItem = (options: options.CreateItemOptions) => {
     return this.post<Item>(`${this.url}${this.version}/items`, options);
   }
 
