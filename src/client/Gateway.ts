@@ -94,7 +94,14 @@ export abstract class Gateway {
       ? await nodeFetch(url, options)
       : await fetch(url, options);
 
-    const data = await response.json();
+    let data;
+
+    try {
+      data = await response.json();
+    } catch {
+      // JSONでパースできないレスポンスボディのときはundefinedを返す
+      data = undefined;
+    }
 
     if (response.ok) {
       return data as T;
