@@ -23,7 +23,7 @@ export interface CreateTemplateOptions {
   title: string;
 }
 
-export type UpdateTemplateOptions = Partial<CreateTemplateOptions>;
+export type UpdateTemplateOptions = CreateTemplateOptions;
 
 export interface CreateProjectOptions {
   /** このプロジェクトが進行中かどうか */
@@ -36,7 +36,7 @@ export interface CreateProjectOptions {
   tags: Tagging[];
 }
 
-export type UpdateProjectOptions = Partial<CreateProjectOptions>;
+export type UpdateProjectOptions = CreateProjectOptions;
 
 export interface FetchItemsOptions extends PaginationOptions {
   /** 検索クエリ */
@@ -62,4 +62,4 @@ export interface CreateItemOptions {
   tweet?: boolean;
 }
 
-export type UpdateItemOptions = Partial<CreateItemOptions>;
+export type UpdateItemOptions = CreateItemOptions;
