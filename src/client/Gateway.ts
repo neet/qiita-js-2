@@ -55,7 +55,8 @@ export abstract class Gateway {
    * @return 何も返しません
    */
   public setUrl (url: string): void {
-    this.url = url;
+    // トレーリングスラッシュを削除
+    this.url = url.replace(/\/$/, '');
   }
 
   /**
@@ -64,7 +65,8 @@ export abstract class Gateway {
    * @return 何も返しません
    */
   public setVersion (version: string): void {
-    this.version = version;
+    // トレーリングスラッシュを削除
+    this.version = version.replace(/\/$/, '');
   }
 
   /**
