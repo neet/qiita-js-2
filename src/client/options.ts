@@ -2,9 +2,9 @@ import { Tagging } from '../entities/Tagging';
 
 export interface PaginationOptions {
   /** ページ番号 (1から100まで) */
-  page?: string;
+  page?: number;
   /** 1ページあたりに含まれる要素数 (1から100まで) */
-  per_page?: string;
+  per_page?: number;
 }
 
 export interface FetchTagsOptions extends PaginationOptions {
