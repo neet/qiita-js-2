@@ -28,7 +28,7 @@ export abstract class Gateway {
    */
   constructor (options?: { url?: string, token?: string, version?: string }) {
     if (options && options.url) {
-      this.url     = options.url;
+      this.url = options.url;
     }
 
     if (options && options.version) {
