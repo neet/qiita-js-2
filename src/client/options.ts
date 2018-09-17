@@ -10,8 +10,6 @@ export interface PaginationOptions {
 export interface FetchTagsOptions extends PaginationOptions {
   /** 並び順 (countで投稿数順、nameで名前順) */
   sort?: 'count'|'name';
-  /** [ドキュメント記載無し] 検索クエリ */
-  q?: string;
 }
 
 export interface CreateTemplateOptions {

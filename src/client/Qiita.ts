@@ -129,7 +129,6 @@ export class Qiita extends Gateway {
    * @param options.page ページ番号 (1から100まで)
    * @param options.perPage 1ページあたりに含まれる要素数 (1から100まで)
    * @param options.sort 並び順 (countで投稿数順、nameで名前順)
-   * @param options.q [ドキュメント記載無し] 検索クエリ
    * @return タグ一覧を返す非同期反復可能オブジェクト
    */
   public fetchTags = (options?: options.FetchTagsOptions) => {
