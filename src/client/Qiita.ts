@@ -672,20 +672,31 @@ export class Qiita extends Gateway {
    * アクセストークンに紐付いたユーザを返します。
    * @return 認証中のユーザ
    */
-  public fetchMe = () => {
+  public fetchAuthenticatedUser = () => {
     return this.get<AuthenticatedUser>(`${this.url}${this.version}/authenticated_user`);
   }
 
   /**
    * 認証中のユーザの投稿の一覧を作成日時の降順で返します。
-   * @param page ページ番号 (1から100まで)
-   * @param perPage 1ページあたりに含まれる要素数 (1から100まで)
+   * @param options.page ページ番号 (1から100まで)
+   * @param options.per_page 1ページあたりに含まれる要素数 (1から100まで)
    * @return 投稿一覧を返す非同期反復可能オブジェクト
    */
-  public fetchMyItems = (page: string, perPage: string) => {
-    return this.paginationGenerator<Item[]>(`${this.url}${this.version}/authenticated_user/items`, {
-      page,
-      per_page: perPage,
-    });
+  public fetchAuthenticatedUserItems = (options?: options.PaginationOptions) => {
+    return this.paginationGenerator<Item[]>(`${this.url}${this.version}/authenticated_user/items`, options);
   }
+
+  /**
+   * `Qiita.fetchAuthenticatedUser` のシノニムです
+   * @return 認証中のユーザ
+   */
+  public fetchMe = () => this.fetchAuthenticatedUser();
+
+  /**
+   * `Qiita.fetchAuthenticatedUserItems` のシノニムです
+   * @param options.page ページ番号 (1から100まで)
+   * @param options.per_page 1ページあたりに含まれる要素数 (1から100まで)
+   * @return 投稿一覧を返す非同期反復可能オブジェクト
+   */
+  public fetchMyItems = (options?: options.PaginationOptions) => this.fetchAuthenticatedUserItems(options);
 }
