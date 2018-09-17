@@ -150,7 +150,7 @@ export class Qiita extends Gateway {
    * @param tag_id タグのID
    * @return タグ
    */
-  public checkIfFollowingTag = (tag_id: string) => {
+  public fetchTagFollowing = (tag_id: string) => {
     return this.get<Tag>(`${this.url}${this.version}/tags/${tag_id}/following`);
   }
 
@@ -414,7 +414,7 @@ export class Qiita extends Gateway {
    * @param user_id ユーザーID
    * @return 空のオブジェクト
    */
-  public checkIfFollowingUser = (user_id: string) => {
+  public fetchIfUserFollowing = (user_id: string) => {
     return this.get<void>(`${this.url}${this.version}/users/${user_id}/following`);
   }
 
@@ -500,7 +500,7 @@ export class Qiita extends Gateway {
    * @param item_id 投稿ID
    * @return 空のオブジェクト
    */
-  public checkIfLikedItem = (item_id: string) => {
+  public fetchIfItemLiked = (item_id: string) => {
     return this.get<void>(`${this.url}${this.version}/items/${item_id}/like`);
   }
 
@@ -527,7 +527,7 @@ export class Qiita extends Gateway {
    * @param item_id 投稿ID
    * @return 空のオブジェクト
    */
-  public checkIfStockedItem = (item_id: string) => {
+  public fetchIfItemStocked = (item_id: string) => {
     return this.get<void>(`${this.url}${this.version}/items/${item_id}/stock`);
   }
 
