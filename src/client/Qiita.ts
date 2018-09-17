@@ -8,7 +8,7 @@ import { Item } from '../entities/Item';
 import { Like } from '../entities/Like';
 import { Project } from '../entities/Project';
 import { Reaction } from '../entities/Reaction';
-import { Tag } from '../entities/Tag';
+import { SearchTagResult, Tag } from '../entities/Tag';
 import { Tagging } from '../entities/Tagging';
 import { Team } from '../entities/Team';
 import { TeamInvitation } from '../entities/TeamInvitation';
@@ -199,6 +199,15 @@ export class Qiita extends Gateway {
    */
   public fetchTempalte = (template_id: string) => {
     return this.get<Template>(`${this.url}${this.version}/templates/${template_id}`);
+  }
+
+  /**
+   * [実験的] タグを検索します
+   * @param q 検索クエリ文字列
+   * @return タグの配列
+   */
+  public searchTags = (q: string) => {
+    return this.get<SearchTagResult>(`${this.url}/api/tags`, { q });
   }
 
   /**

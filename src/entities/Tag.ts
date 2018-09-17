@@ -8,3 +8,10 @@ export interface Tag {
   /** このタグが付けられた投稿の数 */
   items_count: number;
 }
+
+export interface SearchTagResult extends Pick<Tag, 'icon_url'> {
+  name: string;
+  url_name: string;
+  follower_count: number;
+  item_count: number;
+}
