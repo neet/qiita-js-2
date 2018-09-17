@@ -55,7 +55,7 @@ export interface CreateItemOptions {
   /** 限定共有状態かどうかを表すフラグ (Qiita:Teamでは無効) */
   private?: boolean;
   /** 投稿に付いたタグ一覧 */
-  tags: Tagging;
+  tags: Tagging[];
   /** 投稿のタイトル */
   title: string;
   /** Twitterに投稿するかどうか (Twitter連携を有効化している場合のみ有効) */
