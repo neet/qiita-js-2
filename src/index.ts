@@ -1,5 +1,6 @@
 export * from './client/Gateway';
 export * from './client/Qiita';
+export * from './client/options';
 
 export * from './entities/AccessToken';
 export * from './entities/AuthenticatedUser';
