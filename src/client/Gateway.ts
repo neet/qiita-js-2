@@ -123,19 +123,21 @@ export abstract class Gateway {
     try {
       return await axios.request<T>(options);
     } catch (error) {
-      switch (error.status) {
+      const { message, status } = error.response;
+
+      switch (status) {
         case 401:
-          throw new QiitaUnauthorizedError(error.data.message || 'リクエストに必要な権限が不足しています。');
+          throw new QiitaUnauthorizedError(message);
         case 403:
-          throw new QiitaForbiddenError(error.data.message || 'このリクエストは禁止されています。');
+          throw new QiitaForbiddenError(message);
         case 404:
-          throw new QiitaNotFoundError(error.data.message || '指定したエンドポイントが見つかりませんでした');
+          throw new QiitaNotFoundError(message);
         case 429:
-          throw new QiitaRateLimitError(error.data.message || 'APIのレートリミットに到達しました。時間をおいてもう一度お試しください。');
+          throw new QiitaRateLimitError(message);
         case 500:
-          throw new QiitaInternalServerError(error.data.message || 'Qiitaのサーバーが internal server error を返しました。ホストが混雑している可能性がありますので、時間をおいてもう一度お試しください。');
+          throw new QiitaInternalServerError(message);
         default:
-          throw new QiitaError('QiitaError', error.data.message || 'Qiita APIのリクエスト中に予期せぬエラーが発生しました');
+          throw new QiitaError('QiitaError', message);
       }
     }
   }
