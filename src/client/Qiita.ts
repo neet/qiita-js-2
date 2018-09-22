@@ -1,3 +1,4 @@
+import { getNextUrl } from '../client/linkHeader';
 import { Gateway } from './Gateway';
 import * as options from './options';
 
@@ -20,26 +21,22 @@ export class Qiita extends Gateway {
   /**
    * Qiita APIのページネーションをラップする非同期反復可能オブジェクトを返します
    * nextの引数に文字列 'reset' を渡すと最初のインデックスに戻ることができます。
-   * @param url リクエストするURL
-   * @param options リクエストのオプション
+   * @param initialUrl 最初にリクエストするURL
+   * @param params リクエストのオプション
    */
-  public async * paginationGenerator <T extends any[]> (url: string, options?: any) {
+  public async * paginationGenerator <T extends any[]> (initialUrl: string, params?: options.PaginationOptions) {
     // Qiitaのページネーションインデックスは1から始まります
-    let page = 1;
+    let next: string|null = initialUrl;
 
     while (true) {
-      const data = await this.get<T>(url, { ...options, page });
-      const result: T | 'reset' = yield data;
+      const response = await this.get<T>(next, { ...params });
+      const result: T | 'reset' = yield response;
 
       if (result === 'reset') {
-        page = 1;
+        next = initialUrl;
       } else {
-        page++;
-
-        // レスポンスの配列の長さがない場合にイテレーターを終了します。
-        if (!data.length) {
-          break;
-        }
+        next = getNextUrl(response.headers);
+        if (!next) { break; }
       }
     }
   }
