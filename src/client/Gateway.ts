@@ -1,4 +1,4 @@
-import nodeFetch from 'node-fetch';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import * as querystring from 'querystring';
 
 import { QiitaError } from '../errors/QiitaError';
@@ -95,7 +95,7 @@ export abstract class Gateway {
    * @param options Fetch APIの第二引数に渡されるオプションです
    * @return パースされたJSONオブジェクトを解決するPromiseです
    */
-  protected async request <T> (url: string, options: { [key: string]: any } = {}): Promise<T> {
+  protected async request <T> (options: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     if ( !options.headers ) {
       options.headers = {};
     }
@@ -112,38 +112,30 @@ export abstract class Gateway {
       options.headers.Authorization = `Bearer ${this.token}`;
     }
 
-    const response = typeof window === 'undefined'
-      ? await nodeFetch(url, options)
-      : await fetch(url, options);
-
-    let data;
+    options.transformResponse = [(data) => {
+      try {
+        return JSON.parse(data);
+      } catch {
+        return data;
+      }
+    }];
 
     try {
-      data = await response.json();
-    } catch {
-      // JSONでパースできないレスポンスボディのときはundefinedを返す
-      data = undefined;
-    }
-
-    if (response.ok) {
-      return data as T;
-    } else {
-      // Qiitaがエラーの際に返すステータスコードが明記されていなかったので
-      // ありそうなものをハンドルしています。
-      // ref: https://qiita.com/api/v2/docs#%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89
-      switch (response.status) {
+      return await axios.request<T>(options);
+    } catch (error) {
+      switch (error.status) {
         case 401:
-          throw new QiitaUnauthorizedError(data.message || 'リクエストに必要な権限が不足しています。');
+          throw new QiitaUnauthorizedError(error.data.message || 'リクエストに必要な権限が不足しています。');
         case 403:
-          throw new QiitaForbiddenError(data.message || 'このリクエストは禁止されています。');
+          throw new QiitaForbiddenError(error.data.message || 'このリクエストは禁止されています。');
         case 404:
-          throw new QiitaNotFoundError(data.message || '指定したエンドポイントが見つかりませんでした');
+          throw new QiitaNotFoundError(error.data.message || '指定したエンドポイントが見つかりませんでした');
         case 429:
-          throw new QiitaRateLimitError(data.message || 'APIのレートリミットに到達しました。時間をおいてもう一度お試しください。');
+          throw new QiitaRateLimitError(error.data.message || 'APIのレートリミットに到達しました。時間をおいてもう一度お試しください。');
         case 500:
-          throw new QiitaInternalServerError(data.message || 'Qiitaのサーバーが internal server error を返しました。ホストが混雑している可能性がありますので、時間をおいてもう一度お試しください。');
+          throw new QiitaInternalServerError(error.data.message || 'Qiitaのサーバーが internal server error を返しました。ホストが混雑している可能性がありますので、時間をおいてもう一度お試しください。');
         default:
-          throw new QiitaError('QiitaError', data.message || 'Qiita APIのリクエスト中に予期せぬエラーが発生しました');
+          throw new QiitaError('QiitaError', error.data.message || 'Qiita APIのリクエスト中に予期せぬエラーが発生しました');
       }
     }
   }
@@ -154,8 +146,12 @@ export abstract class Gateway {
    * @param params クエリ文字列
    * @param options Fetch APIの第二引数になるオブジェクト
    */
-  protected get <T> (url: string, params = {}, options = {}): Promise<T> {
-    return this.request(url + (Object.keys(params).length ? '?' + querystring.stringify(params) : ''), { method: 'GET', ...options });
+  protected get <T> (url: string, params = {}, options = {}) {
+    return this.request<T>({
+      method: 'GET',
+      url: url + (Object.keys(params).length ? '?' + querystring.stringify(params) : ''),
+      ...options,
+    });
   }
 
   /**
@@ -164,8 +160,13 @@ export abstract class Gateway {
    * @param body リクエストボディ
    * @param options Fetch APIの第二引数になるオブジェクト
    */
-  protected post <T> (url: string, body = {}, options = {}): Promise<T> {
-    return this.request(url, { method: 'POST', body: JSON.stringify(body), ...options });
+  protected post <T> (url: string, body = {}, options = {}) {
+    return this.request<T>({
+      method: 'POST',
+      url,
+      data: JSON.stringify(body),
+      ...options,
+    });
   }
 
   /**
@@ -174,8 +175,13 @@ export abstract class Gateway {
    * @param body リクエストボディ
    * @param options Fetch APIの第二引数になるオブジェクト
    */
-  protected put <T> (url: string, body = {}, options = {}): Promise<T> {
-    return this.request(url, { method: 'PUT', body: JSON.stringify(body), ...options });
+  protected put <T> (url: string, body = {}, options = {}) {
+    return this.request<T>({
+      method: 'PUT',
+      url,
+      data: JSON.stringify(body),
+      ...options,
+    });
   }
 
   /**
@@ -184,8 +190,13 @@ export abstract class Gateway {
    * @param body リクエストボディ
    * @param options Fetch APIの第二引数になるオブジェクト
    */
-  protected delete <T> (url: string, body = {}, options = {}): Promise<T> {
-    return this.request(url, { method: 'DELETE', body: JSON.stringify(body), ...options });
+  protected delete <T> (url: string, body = {}, options = {}) {
+    return this.request<T>({
+      method: 'DELETE',
+      url,
+      data: JSON.stringify(body),
+      ...options,
+    });
   }
 
   /**
@@ -194,7 +205,12 @@ export abstract class Gateway {
    * @param body リクエストボディ
    * @param options Fetch APIの第二引数になるオブジェクト
    */
-  protected patch <T> (url: string, body = {}, options = {}): Promise<T> {
-    return this.request(url, { method: 'PATCH', body: JSON.stringify(body), ...options });
+  protected patch <T> (url: string, body = {}, options = {}) {
+    return this.request<T>({
+      method: 'PATCH',
+      url,
+      data: JSON.stringify(body),
+      ...options,
+    });
   }
 }
