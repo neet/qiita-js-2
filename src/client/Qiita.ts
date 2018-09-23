@@ -34,9 +34,12 @@ export class Qiita extends Gateway {
 
       if (result === 'reset') {
         next = initialUrl;
-      } else {
-        next = getNextUrl(response.headers);
-        if (!next) { break; }
+      }
+
+      next = getNextUrl(response.headers);
+
+      if (!next) {
+        break;
       }
     }
   }
