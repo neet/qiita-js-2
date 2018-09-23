@@ -31,7 +31,7 @@ export class Qiita extends Gateway {
 
     while (next) {
       const response = await this.get<T>(next);
-      const result   = yield response.data as T | 'reset';
+      const result: T | 'reset' = yield response.data;
 
       if (result === 'reset') {
         next = initialUrl;
