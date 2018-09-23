@@ -25,21 +25,18 @@ export class Qiita extends Gateway {
    * @param initialUrl 最初にリクエストするURL
    * @param params リクエストのオプション
    */
-  protected async * paginationGenerator <T extends any[]> (initialUrl: string, params?: options.PaginationOptions) {
-    let next: string|null = initialUrl + (params ? '?' + querystring.stringify(params) : '');
+  protected async * paginationGenerator <T extends any[]> (url: string, params?: options.PaginationOptions) {
+    const initialUrl = url + (params ? '?' + querystring.stringify(params) : '');
+    let next: string|null = initialUrl;
 
-    while (true) {
+    while (next) {
       const response = await this.get<T>(next);
-      const result: T | 'reset' = yield response.data;
+      const result   = yield response.data as T | 'reset';
 
       if (result === 'reset') {
         next = initialUrl;
-      }
-
-      next = getNextUrl(response.headers);
-
-      if (!next) {
-        break;
+      } else {
+        next = getNextUrl(response.headers);
       }
     }
   }
